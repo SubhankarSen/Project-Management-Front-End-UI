@@ -1,0 +1,122 @@
+<div class="card">  
+    <div class="card-header" style="text-align:center">  
+        <b>Add User</b>
+    </div>
+    <div class="card-body">  
+        <form [formGroup]='FromUser' (ngSubmit)="AddUpdateUser(FromUser.value)">
+                <div class="row">  
+                        <div class="form-group col-sm-3">  
+                            <input type="hidden" class="form-control" formControlName="userID" id="userID" >  
+                        </div>
+                    </div>
+            <div class="row">  
+                <div class="form-group col-sm-3">  
+                    <label for="company">User First Name</label>  
+                    <input type="text" class="form-control" formControlName="userFirstName" id="userFirstName" placeholder="User First Name" >  
+                </div>
+            </div>
+            <div class="row">   
+                <div class="form-group col-sm-3">  
+                    <label for="company">User last Name</label>  
+                    <input type="text" class="form-control" formControlName="userLastName" id="userLastName" placeholder="User last Name" >  
+                </div>
+            </div>
+            <div class="row">  
+                <div class="form-group col-sm-3">  
+                    <label for="company">Employee ID</label>  
+                    <input type="text" class="form-control" formControlName="userEmployeeID" id="userEmployeeID" placeholder="Employee ID" >  
+                </div>
+            </div>  
+            <div class="row">  
+                <!-- <div class="form-group col-sm-3" *ngIf="userID == '0' || ''; then AddUser else UpdateUser"></div> -->
+                <div class="form-group col-sm-3" >
+                    <!-- <ng-template *ngIf = "FromUser.userID == '0' || ''; then Add else Update"> -->
+                    <!-- <ng-template #AddUser><button type="submit" class="btn btn-primary" [disabled]="!FromUser.valid">{{addpdatebutton}}</button></ng-template> -->
+                    <button type="submit" class="btn btn-primary">{{addupdatebutton}}</button>
+                </div>
+                    <!-- <ng-template #add>Add User</ng-template> -->
+                <!-- </div> -->
+                <div class="form-group col-sm-3">  
+                    <button type="reset" class="btn btn-danger">Reset</button>  
+                </div>  
+            </div>  
+        </form>  
+    </div>
+    <!-- <div class="card-footer" ng-controller = "UserController">   -->
+    <div class="card-footer">
+        <div class="col-lg-12 table-responsive">  
+            <table class="table table-striped">
+                <!-- <thead>
+                    <th>
+                        <form>
+                            <div class="form-group col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                    <input type="text" class="form-control" placeholder="Search" ng-model="User">
+                                </div>
+                            </div>
+                        </form>
+                    </th>
+                    <th>
+                        <label>Sort By: </label>
+                    </th>
+                    <th>
+                        <button ng-click="sortBy('User.userID')">UserID</button>
+                        <span class="sortorder" ng-show="propertyName === 'User.userID'" ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button ng-click="sortBy('User.userFirstName')">First Name</button>
+                        <span class="sortorder" ng-show="propertyName === 'userFirstName'" ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button ng-click="sortBy('User.userLastName')">Last Name</button>
+                        <span class="sortorder" ng-show="propertyName === 'userLastName'" ng-class="{reverse: reverse}"></span>
+                    </th>
+                    <th>
+                        <button ng-click="sortBy('User.userEmployeeID')">Employee ID</button>
+                        <span class="sortorder" ng-show="propertyName === 'userEmployeeID'" ng-class="{reverse: reverse}"></span>
+                    </th>
+                </thead> -->
+                <thead>  
+                    <tr>
+                        <th>User ID</th>  
+                        <th>User First Name</th>  
+                        <th>User Last Name</th>  
+                        <th>Employee ID</th>    
+                        <th></th>  
+                    </tr> 
+                </thead>  
+                <tbody>  
+                    <!-- <tr *ngFor="let User of allUser|async|"> -->
+                    <!-- <tr ng-repeat="User in allUser|orderBy:propertyName:reverse"> -->
+                    <tr *ngFor="let User of allUser|async">
+                        <td>{{User.userID}}</td>  
+                        <td>{{User.userFirstName}}</td>  
+                        <td>{{User.userLastName}}</td>  
+                        <td>{{User.userEmployeeID}}</td>    
+                        <td>  
+                            <button type="button" class="btn btn-primary mr-1" (click)="UserEdit(User.userID)">Edit</button>  
+                            <button type="button" class="btn btn-danger mr-1" (click)="DeleteUser(User.userID)">Delete</button>  
+                        </td>  
+                    </tr>  
+                </tbody>  
+            </table>  
+        </div>  
+    </div>  
+</div>    
+
+<!-- <script>
+angular.module('orderByUser', [])
+.controller('UserController', ['$scope', function($scope) {
+  let users = JSON.parse(allUser);
+  console.log(users.degree);
+  $scope.propertyName = 'User.userID';
+  $scope.reverse = true;
+  $scope.users = users;
+
+  $scope.sortBy = function(propertyName) {
+    $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
+    $scope.propertyName = propertyName;
+  };
+}]);
+</script> -->

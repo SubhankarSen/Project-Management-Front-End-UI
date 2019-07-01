@@ -1,0 +1,77 @@
+<div class="card">  
+    <div class="card-header" style="text-align:center">  
+        <b>Add Task</b>
+    </div>    
+      <div class="row">  
+            <div class="form-group">
+                    <label for="company">Project:</label> 
+                    <form class="form-inline mr-auto">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success btn-rounded btn-sm my-0" type="submit">Search</button>
+                    </form>
+            </div>
+
+            <div class="form-group form-inline mr-sm-3 col-sm-3">  
+                    <label for="company">Task: </label> <input type="text" class="form-control" formControlName="ProjectDesc" id="projectDesc" placeholder="Project" >
+                </div>
+            </div>
+
+            <div class="row">   
+                <div class="form-group form-inline form-check-inline mr-sm-3 col-sm-3">
+                    <label class="div class="form-check>
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" name="Parent Task" id="Parent Task" value="checkedValue" checked>
+                        Display value
+                    </label>
+                      </label>
+                </div>
+            </div>
+            
+            <div class="row">
+                    <div class="form-group form-inline mr-sm-3 col-sm-3">
+                        <label form="company">Priority: </label>
+                        <input type="range" class= "custom-range"min="0" max="30" value="70" class="slider" id="myRange" >
+                    </div>
+            </div>
+
+            <div class="row">  
+                    <div class="form-group">
+                            <label for="company">Parent Task:</label> 
+                            <form class="form-inline mr-auto">
+                                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-outline-success btn-rounded btn-sm my-0" type="submit">Search</button>
+                            </form>
+                    </div>
+            </div>
+
+            <div class="form-group form-inline mr-sm-3 col-sm-3">  
+                    <label for="company">Start Date: </label>
+                    <input type="date" class="form-control" formControlName="projectStartDate" id="projectStartDate" placeholder="Start Date" >
+                </div>
+                <div class="form-group form-inline mr-sm-3  col-sm-3">
+                    <label for="company">End Date: </label>
+                    <input type="date" class="form-control" formControlName="projectEndDate" id="projectEndDate" placeholder="End Date" >
+            </div>
+
+            <div class="row">  
+                    <div class="form-group">
+                            <label for="company">User:</label> 
+                            <form class="form-inline mr-auto">
+                                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-outline-success btn-rounded btn-sm my-0" type="submit">Search</button>
+                            </form>
+                    </div>
+            </div>
+
+            <div class="row">  
+                    <!-- <div class="form-group col-sm-3" *ngIf="projectID !== '0' || ''; then AddProject else UpdateProject">
+                        <ng-template #AddProject><button type="submit" class="btn btn-primary" >Add Project</button></ng-template>
+                        <ng-template #UpdateProject><button type="submit" class="btn btn-primary">Update Project</button></ng-template>
+                    </div> -->
+                    <div class="form-group col-sm-3"> 
+                            <button style="margin:5px;">Add Task</button>
+                    </div>
+                    <div class="form-group col-sm-3">  
+                            <button style="margin:5px;">Reset</button>
+                    </div>  
+                </div>

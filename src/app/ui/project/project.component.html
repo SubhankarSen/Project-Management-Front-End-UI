@@ -1,0 +1,132 @@
+<div class="card">  
+    <div class="card-header" style="text-align:center">  
+        <b>Add Project</b>
+    </div>
+    <div class="card-body">  
+        <form [formGroup]='FromProject' (ngSubmit)="AddUpdateProject(FromProject.value)">
+            <div class="row">  
+                <div class="form-group col-sm-3">  
+                    <input type="hidden" class="form-control" formControlName="projectID" id="projectID" >  
+                </div>
+            </div>
+            <div class="row">  
+                <div class="form-group form-inline mr-sm-3 col-sm-3">  
+                    <label for="company">Project: </label> <input type="text" class="form-control" formControlName="projectDesc" id="projectDesc" placeholder="Project Desc">
+                </div>
+            </div>
+            <div class="row">   
+                <div class="form-group form-inline form-check-inline mr-sm-3 col-sm-3">
+                    <label class="form-check-label">
+                        <input class="form-check-input form-control" type="checkbox" formControlname="Setdate" id="setdate" (change)="setDate($event);" > Set Start and End Date
+                    </label>
+                </div>
+                <div class="form-group form-inline mr-sm-3 col-sm-3">
+                    <label for="company">Start Date: </label>
+                    <input type="text" class="form-control" formControlName="projStartDate" id="projStartDate" placeholder="Start Date"/>
+                </div>
+                <div class="form-group form-inline mr-sm-3  col-sm-3">
+                    <label for="company">End Date: </label>
+                    <input type="text" class="form-control" formControlName="projEndDate" id="projEndDate" placeholder="End Date"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group form-inline mr-sm-3 col-sm-3">
+                    <!-- <input type="range" class="slider" id="priority" min="1" max="30" value="10" onclick="document.getElementById('prioritydisp').innerHTML = " -->
+                    <label form="company"> Priority: </label><input type="range" min="0" max="30" value="0" class="slider" id="priority" formControlName="projPriority">
+                    <p><span id="prioritydisp"></span></p>
+                </div>
+            </div>
+            <div class="row">  
+                <div class="form-group">
+                    <label form="company">Manager:</label> 
+                    <!-- <select class="form-control" id="userID" name="userID" formControlName="userID" (select)="GetUser()"> -->
+                    <select class="form-control custom-select" id="userID" name="userID" formControlName="userID" (change)="GetUser($event)">
+                        <option value="disabled">Choose Manager</option>
+                        <option *ngFor="let User of allUser" [value]="User.userID" >{{User.userFirstName}} {{User.userLastName}}</option>
+                    </select>
+                    <!-- <span class="form-control drop-down">
+                        <input type="text" class="form-control" formControlName="userID" (ngModelChange)="GetUser($event)" (keyup)="onKeyDownAction($event)"/>
+                        <button class="drop-down-button" (click)="toggleDropDown()"><i class="fa fa-angle-down"></i></button>
+                    </span>
+                    <span>
+                        <div class="form-control" *ngIf="showDropDown">
+                            <p *ngFor="let u of userID;let i=index" (click)="updateTextBox(u[userFirstName]">{{u[userFirstName]}}</p>
+                        </div>
+                    </span> -->
+                </div>
+            </div>
+            <div class="row">  
+                <div class="form-group col-sm-3"> 
+                    <button type="submit" class="btn btn-primary">{{addupdatebutton}}</button>
+                </div>
+                <div class="form-group col-sm-3">  
+                    <button type="reset" class="btn btn-danger">Reset</button>
+                </div>  
+            </div>
+            <div class="topnav">
+                <input type="text" placeholder="Search.." name="Search">
+            </div>
+        </form>  
+    </div>
+    <div class="card-footer">
+        <div class="col-lg-12 table-responsive">  
+            <table class="table table-striped">
+                <thead>  
+                    <tr>
+                        <th>Project ID</th>
+                        <th>Project Description</th>
+                        <th>No of Task </th> 
+                        <th>Completed</th>  
+                        <th>Start Date</th>  
+                        <th>End Date</th>
+                        <th>Priority</th>
+                        <th></th>  
+                    </tr> 
+                </thead>  
+                <tbody>  
+                    <!-- <tr *ngFor="let User of allUser|async|"> -->
+                    <!-- <tr ng-repeat="User in allUser|orderBy:propertyName:reverse"> -->
+                    <tr *ngFor="let Project of allProject|async">
+                        <td>{{Project.projectID}}</td>  
+                        <td>{{Project.projectDesc}}</td>  
+                        <td>{{Project.projNoofTask}}</td>  
+                        <td>{{Project.projCompleted}}</td>  
+                        <td>{{Project.projStartDate}}</td>  
+                        <td>{{Project.projEndDate}}</td>  
+                        <td>{{Project.projPriority}}</td>    
+                        <td>  
+                            <button type="button" class="btn btn-primary mr-1" (click)="ProjectEdit(Project.projectID)">Edit</button>  
+                            <button type="button" class="btn btn-danger mr-1" (click)="DeleteProject(Project.projectID)">Delete</button>  
+                        </td>  
+                    </tr>  
+                </tbody>  
+            </table>  
+        </div>  
+    </div>  
+</div>
+
+<!-- <script>
+    function setdate()
+    {
+        var x=document.getElementById("setDate");
+        var sd=document.getElementById("projectStartDate");
+        var ed=document.getElementById("projectEndDate");
+        if (x.checked)
+        {
+            sd.enabled=true; ed.enabled=true;
+        }
+        else
+        {
+            sd.enabled=false; ed.enabled=false;
+        }
+    }
+
+    var slider = document.getElementById("priority");
+    var output = document.getElementById("prioritydisp");
+    output.innerHTML = slider.value;
+
+    slider.oninput = function() 
+    {
+        output.innerHTML = this.value;
+    }
+</script> -->

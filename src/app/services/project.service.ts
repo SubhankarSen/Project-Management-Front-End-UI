@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Project } from '../model/project';
 import { Observable } from 'rxjs';
+import { ProjectAdd } from '../model/project-add';
 
 @Injectable({
   providedIn: 'root'
@@ -18,10 +19,10 @@ export class ProjectService {
     return this.http.get<Project[]>(this.ProjectApiUrl);
   }
 
-  CreateProject(newproject:Project):Observable<Project[]>
+  CreateProject(newproject:ProjectAdd):Observable<ProjectAdd[]>
   {
     const httpOptions = {headers: new HttpHeaders({'Content-Type':'application/json'})};
-    return this.http.post<Project[]>(this.ProjectApiUrl,newproject,httpOptions)
+    return this.http.post<ProjectAdd[]>(this.ProjectApiUrl,newproject,httpOptions)
   }
 
   DeleteProject(ProjectID:string):Observable<number>
@@ -29,14 +30,14 @@ export class ProjectService {
     return this.http.delete<number>(this.ProjectApiUrl+'/'+ProjectID);
   }
 
-  getProjectById(ProjectID:string):Observable<Project>
+  getProjectById(ProjectID:string):Observable<ProjectAdd>
   {
-    return this.http.get<Project>(this.ProjectApiUrl+'/'+ProjectID);
+    return this.http.get<ProjectAdd>(this.ProjectApiUrl+'/'+ProjectID);
   }
 
-  UpdateProject(Project:Project):Observable<Project>
+  UpdateProject(Project:ProjectAdd):Observable<ProjectAdd>
   {
     const httpOptions = {headers: new HttpHeaders({'Content-Type':'application/json'})};
-    return this.http.put<Project>(this.ProjectApiUrl+'/'+Project.projectID,Project,httpOptions);
+    return this.http.put<ProjectAdd>(this.ProjectApiUrl+'/'+Project.projectID,Project,httpOptions);
   }
 }

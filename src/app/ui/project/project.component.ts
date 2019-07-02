@@ -6,6 +6,7 @@ import { UserService } from 'src/app/services/user.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { DatePipe } from '@angular/common';
+import { ProjectAdd } from 'src/app/model/project-add';
 
 @Component({
   selector: 'app-project',
@@ -55,6 +56,7 @@ export class ProjectComponent implements OnInit {
   {
     debugger;
     this.allProject = this.ProjectService.getProject();
+    console.log();
   }
 
   Reset()
@@ -63,7 +65,7 @@ export class ProjectComponent implements OnInit {
     this.showDropDown = false;
   }
 
-  AddUpdateProject(Project:Project)
+  AddUpdateProject(Project:ProjectAdd)
   {
     debugger;
     if (this.ProjectID == "0" || null)
@@ -72,7 +74,7 @@ export class ProjectComponent implements OnInit {
       this.ProjectService.CreateProject(Project).subscribe(() => 
       {
           this.dataSaved = true;
-          console.log(Project);
+          console.log();
           this.message = 'Project saved Successfully';
           this.GetProject();
           this.Reset();
@@ -117,32 +119,32 @@ export class ProjectComponent implements OnInit {
         this.dataSaved = false;
         debugger;
         this.ProjectID = Response.projectID;
-        this.FromProject.controls['projectDesc'].setValue(Response.projectDesc);
-        this.FromProject.controls['projStartDate'].setValue(Response.projStartDate);
-        this.FromProject.controls['projEndDate'].setValue(Response.projEndDate);
-        this.FromProject.controls['projPriority'].setValue(Response.projPriority);
+        this.FromProject.controls['projectDesc'].setValue(Response.project_Desc);
+        this.FromProject.controls['projStartDate'].setValue(Response.projStart_Date);
+        this.FromProject.controls['projEndDate'].setValue(Response.projEnd_Date);
+        this.FromProject.controls['projPriority'].setValue(Response.proj_Priority);
         this.FromProject.controls['userID'].setValue(Response.userID);
         // this.FromProject.controls['userLastName'].setValue(Response.user.userLastName);
         // this.FromProject.controls['userEmployeeID'].setValue(Response.userEmployeeID);
       });
   }
 
-  setDate(e)
-  {
-    this.setdate = e.target.checked;
-    if (this.setdate == true)
-    {
-      this.project.projStartDate = this.datePipe.transform(this.todayDate, 'yyyy-MM-dd');
-      this.project.projEndDate = this.datePipe.transform(this.tomorrowDate, 'yyyy-MM-dd');
-      // alert('button checked');
-    }
-    else
-    {
-      this.project.projStartDate = '';
-      this.project.projEndDate = '';
-      // alert('button unchecked');
-    }
-  }
+  // setDate(e)
+  // {
+  //   this.setdate = e.target.checked;
+  //   if (this.setdate == true)
+  //   {
+  //     this.project.projStart_Date = this.datePipe.transform(this.todayDate, 'yyyy-MM-dd');
+  //     this.project.projEnd_Date = this.datePipe.transform(this.tomorrowDate, 'yyyy-MM-dd');
+  //     // alert('button checked');
+  //   }
+  //   else
+  //   {
+  //     this.project.projStart_Date = '';
+  //     this.project.projEnd_Date = '';
+  //     // alert('button unchecked');
+  //   }
+  // }
 
   ngOnInit() 
   {

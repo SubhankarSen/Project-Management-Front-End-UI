@@ -65,7 +65,8 @@ export class ProjectComponent implements OnInit {
     this.showDropDown = false;
   }
 
-  AddUpdateProject(Project:ProjectAdd)
+  // AddUpdateProject(Project:ProjectAdd)
+  AddUpdateProject(Project:Project)
   {
     debugger;
     if (this.ProjectID == "0" || null)
@@ -119,10 +120,10 @@ export class ProjectComponent implements OnInit {
         this.dataSaved = false;
         debugger;
         this.ProjectID = Response.projectID;
-        this.FromProject.controls['projectDesc'].setValue(Response.project_Desc);
-        this.FromProject.controls['projStartDate'].setValue(Response.projStart_Date);
-        this.FromProject.controls['projEndDate'].setValue(Response.projEnd_Date);
-        this.FromProject.controls['projPriority'].setValue(Response.proj_Priority);
+        this.FromProject.controls['projectDesc'].setValue(Response.projectDesc);
+        this.FromProject.controls['projStartDate'].setValue(Response.projStartDate);
+        this.FromProject.controls['projEndDate'].setValue(Response.projEndDate);
+        this.FromProject.controls['projPriority'].setValue(Response.projPriority);
         this.FromProject.controls['userID'].setValue(Response.userID);
         // this.FromProject.controls['userLastName'].setValue(Response.user.userLastName);
         // this.FromProject.controls['userEmployeeID'].setValue(Response.userEmployeeID);

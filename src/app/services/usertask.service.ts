@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class UsertaskService {
 
   public ApiUrl = 'http://localhost:64492/api';
-  public UsertaskApiUrl = 'http://localhost:64492/api/Usertasks';
+  public UsertaskApiUrl = 'http://localhost:64492/api/UserTasks';
 
   constructor(private http:HttpClient) { }
 

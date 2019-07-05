@@ -108,22 +108,28 @@ export class UsertaskComponent implements OnInit {
       }
     }
   
-    // UsertaskEdit(UsertaskID:string)
-    // {
-    //   debugger;
-    //   this.Reset();
-    //   this.addupdatebutton = "Update Task";
-    //   this.UsertaskService.getUsertaskById(UsertaskID).subscribe(Response =>
-    //     {
-    //       this.message = null;
-    //       this.dataSaved = false;
-    //       debugger;
-    //       this.UsertaskID = Response.userTaskID;
-    //       this.FromUsertask.controls['userTaskID'].setValue(Response.userTaskID);
-    //       // this.FromProject.controls['userLastName'].setValue(Response.user.userLastName);
-    //       // this.FromProject.controls['userEmployeeID'].setValue(Response.userEmployeeID);
-    //     });
-    // }
+    UsertaskEdit(UsertaskID:string)
+    {
+      debugger;
+      this.Reset();
+      this.addupdatebutton = "Update Task";
+      this.UsertaskService.getUsertaskById(UsertaskID).subscribe(Response =>
+        {
+          this.message = null;
+          this.dataSaved = false;
+          debugger;
+          this.UsertaskID = Response.userTaskID;
+          this.FromUsertask.controls['projectID'].setValue(Response.projectID);
+          this.FromUsertask.controls['usertaskDesc'].setValue(Response.userTaskDesc);
+          this.FromUsertask.controls['userTaskPriority'].setValue(Response.userTaskPriority);
+          this.FromUsertask.controls['parentTaskID'].setValue(Response.parentTaskID);
+          this.FromUsertask.controls['userTaskStartDate'].setValue(Response.userTaskStartDate);
+          this.FromUsertask.controls['userTaskEndDate'].setValue(Response.userTaskEndDate);
+          this.FromUsertask.controls['userID'].setValue(Response.userID);
+          // this.FromProject.controls['userLastName'].setValue(Response.user.userLastName);
+          // this.FromProject.controls['userEmployeeID'].setValue(Response.userEmployeeID);
+        });
+    }
 
     GetUser(u:any)
     {

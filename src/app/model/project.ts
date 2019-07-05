@@ -6,11 +6,12 @@ export class Project
     user:User;
     usertask:Usertask[];
     projectID: string;
-    project_Desc: string;
-    projStart_Date: Date;
-    projEnd_Date: Date;
-    proj_Priority: string;
+    projectDesc: string;
+    projStartDate: Date;
+    projEndDate: Date;
+    projPriority: string;
     userID: string;
+  static usertask: any;
     
     // userID: string;
     // projusertask:Usertask;

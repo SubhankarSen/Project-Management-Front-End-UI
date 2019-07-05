@@ -1,1 +1,67 @@
-<p>viewtask works!</p>
+<div class="card">  
+    <div class="card-header" style="text-align:center">  
+        <b>View Task</b>
+    </div>
+    <div class="card-body">
+        <form [formGroup]='FromViewtask' (ngSubmit)="GetProjectByID(FromViewtask.value.projectID)">
+            <div class="row">
+                <div class="form-group form-inline col-sm-3 mr-sm-3">
+            <!-- <label form="company">Project: </label>  -->
+            <!-- <select class="form-control" id="userID" name="userID" formControlName="userID" (select)="GetUser()"> -->
+                    <select class="form-control custom-select" id="projectID" name="projectID" formControlName="projectID" (change)="GetProject($event)">
+                        <option value="disabled" selected>Choose Project</option>
+                        <option *ngFor="let Project of allProject" [value]="Project.projectID">{{Project.projectDesc}}</option>
+                    </select>
+                <!-- <div class="form-group form-inline col-sm-3 mr-sm-3">   -->
+                    <button type="submit" class="btn btn-primary" >Search</button>  
+                </div> 
+            </div>
+        </form>
+        <label form="company">Sort By: </label>
+        <td>
+            <button (click)="sortByStartDate()" class="btn btn-primary">Start Date</button>  
+        </td>       
+        <td>
+            <button (click)="sortByEndDate()" class="btn btn-primary">End Date</button> 
+        </td>
+        <td>
+            <button (click)="sortByPriority()" class="btn btn-primary">Priority</button> 
+        </td>
+        <td>
+            <button (click)="sortByCompleted()" class="btn btn-primary">Completed</button> 
+        </td>
+    </div>
+    <div class="card-footer">
+        <div class="col-lg-12 table-responsive">  
+            <table class="table table-striped">
+                <thead>  
+                    <tr>
+                        <th>Task ID</th>
+                        <th>Task</th>
+                        <th>Parent</th>
+                        <th>Priority</th> 
+                        <th>Start</th>  
+                        <th>End</th>  
+                        <th></th>  
+                    </tr> 
+                </thead>  
+                <tbody>  
+                    <!-- <tr *ngFor="let User of allUser|async|"> -->
+                    <!-- <tr ng-repeat="User in allUser|orderBy:propertyName:reverse"> -->
+                    <tr *ngFor="let Usertask of allUsertask|async">
+                        <td>{{Usertask.userTaskID}}</td>
+                        <td>{{Usertask.userTaskDesc}}</td>  
+                        <td>{{Usertask.parentTaskDesc}}</td>  
+                        <td>{{Usertask.userTaskPriority}}</td>  
+                        <td>{{Usertask.userTaskStartDate}}</td>  
+                        <td>{{Usertask.userTaskEndDate}}</td>    
+                        <td>  
+                            <button type="button" class="btn btn-primary mr-1" (click)="UsertaskEdit(Usertask.userTaskID)">Edit</button>  
+                            <button type="button" class="btn btn-danger mr-1" (click)="DeleteUsertask(Usertask.userTaskID)">End Task</button>  
+                        </td>  
+                    </tr>  
+                </tbody>  
+            </table>  
+        </div>
+    </div>
+</div>

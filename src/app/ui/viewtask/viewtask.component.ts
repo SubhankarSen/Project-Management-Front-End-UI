@@ -7,6 +7,7 @@ import { DatePipe } from '@angular/common';
 import { Project } from 'src/app/model/project';
 import { Observable } from 'rxjs';
 import { Parenttask } from 'src/app/model/parenttask';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-viewtask',
@@ -19,7 +20,7 @@ export class ViewtaskComponent implements OnInit {
   allUsertask: Observable<Usertask[]>;
   ProjectID: any = "0";
   Project: Project;
-  Usertask:Usertask;
+  Usertask: Usertask;
   // FromViewtask:FormGroup;
   FromViewtask = this.formbuilder.group(
     {
@@ -31,20 +32,9 @@ export class ViewtaskComponent implements OnInit {
     private formbuilder:FormBuilder,
     private ProjectService:ProjectService,
     private UsertaskService:UsertaskService,
-    private datePipe:DatePipe
+    private datePipe:DatePipe,
+    private router:Router
   ) { }
-
-  ngOnInit()
-  {
-    this.FromViewtask = this.formbuilder.group(
-      {
-        projectID: ['',[Validators.required]],
-      });
-    debugger;
-    this.Reset();
-    this.GetUsertask();
-    console.log();
-  }
 
   GetUsertask()
   {
@@ -90,5 +80,32 @@ export class ViewtaskComponent implements OnInit {
   {
     this.FromViewtask.reset();
   }
-  
+
+  EndUsertask(UsertaskID:string)
+  {
+    this.UsertaskService.getUsertaskById(UsertaskID).subscribe(Usertask =>
+      {
+        debugger;
+        // UsertaskID = u.userTaskID;
+        Usertask.userTaskStatus = false;
+        this.UsertaskService.UpdateUsertask(Usertask).subscribe(() => {});
+      });
+  }
+
+  UsertaskEdit(UsertaskID)
+  {
+      this.router.navigate(['/usertask/'],UsertaskID);
+  }
+
+  ngOnInit()
+  {
+    this.FromViewtask = this.formbuilder.group(
+      {
+        projectID: ['',[Validators.required]],
+      });
+    debugger;
+    this.Reset();
+    this.GetUsertask();
+    console.log();
+  }
 }

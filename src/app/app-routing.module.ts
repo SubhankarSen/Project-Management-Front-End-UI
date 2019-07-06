@@ -12,6 +12,8 @@ const routes: Routes = [];
     { path: 'project', component: ProjectComponent },
     { path: 'user', component: UserComponent },
     { path: 'usertask', component: UsertaskComponent },
+    // { path: 'usertask', redirectTo: 'usertask/' },
+    { path: 'eusertask/:id', component: UsertaskComponent },
     { path: 'viewtask', component: ViewtaskComponent },
     { path: '', redirectTo: '/project', pathMatch: 'full' }
       ]),

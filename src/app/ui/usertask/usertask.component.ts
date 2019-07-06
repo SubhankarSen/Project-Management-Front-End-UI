@@ -7,6 +7,7 @@ import { ProjectService } from 'src/app/services/project.service';
 import { UserService } from 'src/app/services/user.service';
 import { UsertaskService } from 'src/app/services/usertask.service';
 import { DatePipe } from '@angular/common';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class UsertaskComponent implements OnInit {
   todayDate: Date;
   tomorrowDate: Date;
   allParenttask: any;
+  Viewtaskparam: any;
 
 
 
@@ -34,7 +36,9 @@ export class UsertaskComponent implements OnInit {
     private ProjectService:ProjectService,
     private UserService:UserService,
     private UsertaskService:UsertaskService,
-    private datePipe:DatePipe) { }
+    private datePipe:DatePipe,
+    private Activatedroute:ActivatedRoute,
+    ) { }
 
     // GetProject()
     // {
@@ -69,9 +73,10 @@ export class UsertaskComponent implements OnInit {
     AddUpdateUsertask(Usertask:Usertask)
     {
       debugger;
-      if (this.UsertaskID == "0" || null)
+      if (this.UsertaskID == "0" || null || ' ')
       {
         Usertask.userTaskID = this.UsertaskID;
+        Usertask.userTaskStatus = true;
         this.UsertaskService.CreateUsertask(Usertask).subscribe(() => 
         {
             this.dataSaved = true;
@@ -168,6 +173,7 @@ export class UsertaskComponent implements OnInit {
     this.FromUsertask = this.formbuilder.group(
       {
         userTaskID: ['',[Validators.required]],
+        // userTaskStatus: ['',[Validators.required]],
         userTaskDesc: ['',[Validators.required]],
         userTaskStartDate: ['',[Validators.required]],
         userTaskEndDate: ['',[Validators.required]],
@@ -181,6 +187,15 @@ export class UsertaskComponent implements OnInit {
       this.todayDate = new Date();
       this.tomorrowDate = new Date();
       this.tomorrowDate.setDate(this.tomorrowDate.getDate()+1);
+
+      // this.Viewtaskparam = this.Activatedroute.paramMap.subscribe(params => {
+      //   debugger;
+      //   console.log(params);
+      //   this.UsertaskID = params.get("id");
+      //   this.UsertaskEdit(this.UsertaskID);
+      // });
+      this.UsertaskID = this.Activatedroute.snapshot.paramMap.get("id");
+      // this.UsertaskEdit(this.UsertaskID);
   }
 
 }

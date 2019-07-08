@@ -17,7 +17,7 @@
                 </div> 
             </div>
         </form>
-        <!-- <label form="company">Sort By: </label>
+        <label form="company">Sort Task By: </label>
         <td>
             <button (click)="sortTable(1)" class="btn btn-primary">Start Date</button>  
         </td>       
@@ -29,19 +29,19 @@
         </td>
         <td>
             <button (click)="sortTable(3)" class="btn btn-primary">Completed</button> 
-        </td> -->
+        </td>
     </div>
     <div class="card-footer">
         <div class="col-lg-12 table-responsive">  
             <table class="table table-striped" id="userTask">
                 <thead>  
                     <tr>
-                        <th onclick="sortTable(0)">Task ID</th>
-                        <th onclick="sortTable(1)">Task</th>
-                        <th onclick="sortTable(2)">Parent</th>
-                        <th onclick="sortTable(3)">Priority</th> 
-                        <th onclick="sortTable(4)">Start</th>  
-                        <th onclick="sortTable(5)">End</th>  
+                        <th>Task ID</th>
+                        <th>Task</th>
+                        <th>Parent</th>
+                        <th>Priority</th> 
+                        <th>Start</th>  
+                        <th>End</th>  
                         <th></th>  
                     </tr> 
                 </thead>
@@ -50,7 +50,7 @@
                     <tr *ngFor="let Usertask of allUsertask">
                         <td>{{Usertask.userTaskID}}</td>
                         <td>{{Usertask.userTaskDesc}}</td>  
-                        <td>{{Usertask.parentTask.parentTaskDesc || "$nbsp;"}}</td>  
+                        <td>{{Usertask.parentTask.parentTaskDesc}}</td>  
                         <td>{{Usertask.userTaskPriority}}</td>  
                         <td>{{Usertask.userTaskStartDate}}</td>  
                         <td>{{Usertask.userTaskEndDate}}</td>    

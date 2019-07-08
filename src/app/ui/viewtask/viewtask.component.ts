@@ -50,7 +50,7 @@ export class ViewtaskComponent implements OnInit {
         {
           if(userTask.parentTaskID = null)
           {
-            userTask.parentTask.parentTaskDesc = " ";
+            userTask.parentTask.parentTaskDesc = "&nbsp;";
           }
         });
     });
@@ -94,7 +94,7 @@ export class ViewtaskComponent implements OnInit {
         {
           if(userTask.parentTaskID = null)
           {
-            userTask.parentTask.parentTaskDesc = " ";
+            userTask.parentTask.parentTaskDesc = "&nbsp;";
           }
         });
     });

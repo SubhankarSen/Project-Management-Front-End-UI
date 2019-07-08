@@ -33,7 +33,8 @@
                 <div class="form-group form-inline mr-sm-3 col-sm-3">
                     <!-- <input type="range" class="slider" id="priority" min="1" max="30" value="10" onclick="document.getElementById('prioritydisp').innerHTML = " -->
                     <label form="company"> Priority: </label><input type="range" min="0" max="30" value="0" class="slider" id="priority" formControlName="projPriority">
-                    <p><span id="prioritydisp"></span></p>
+                    <!-- <p><span id="prioritydisp"></span></p> -->
+                    <output id="prioritydisp" name="prioritydisp" for="priority">0</output>
                 </div>
             </div>
             <div class="row">  
@@ -66,11 +67,24 @@
             <div class="topnav">
                 <input type="text" placeholder="Search.." name="Search">
             </div>
-        </form>  
+        </form>
+        <label form="company">Sort By: </label>
+        <td>
+            <button (click)="sortTable(1)" class="btn btn-primary">Start Date</button>  
+        </td>       
+        <td>
+            <button (click)="sortTable(2)" class="btn btn-primary">End Date</button> 
+        </td>
+        <td>
+            <button (click)="sortTable(0)" class="btn btn-primary">Priority</button> 
+        </td>
+        <td>
+            <button (click)="sortTable(3)" class="btn btn-primary">Completed</button> 
+        </td>
     </div>
     <div class="card-footer">
         <div class="col-lg-12 table-responsive">  
-            <table class="table table-striped">
+            <table class="table table-striped" id="projectTable">
                 <thead>  
                     <tr>
                         <th>Project ID</th>
@@ -105,7 +119,7 @@
     </div>  
 </div>
 
-<!-- <script>
+<script>
     function setdate()
     {
         var x=document.getElementById("setDate");
@@ -121,12 +135,49 @@
         }
     }
 
-    var slider = document.getElementById("priority");
-    var output = document.getElementById("prioritydisp");
-    output.innerHTML = slider.value;
+    // var slider = document.getElementById("priority");
+    // var output = document.getElementById("prioritydisp");
+    // output.innerHTML = slider.value;
 
-    slider.oninput = function() 
-    {
-        output.innerHTML = this.value;
+    // slider.oninput = function() 
+    // {
+    //     output.innerHTML = this.value;
+    // }
+
+    function sortTable(n) {
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("projectTable");
+        switching = true;
+        dir = "asc"; 
+        while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (i = 1; i < (rows.length - 1); i++) {
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("td")[n];
+            y = rows[i + 1].getElementsByTagName("td")[n];
+            if (dir == "asc") {
+            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                shouldSwitch= true;
+                break;
+            }
+            } else if (dir == "desc") {
+            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                shouldSwitch = true;
+                break;
+            }
+            }
+        }
+        if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+            switchcount ++;      
+        } else {
+            if (switchcount == 0 && dir == "asc") {
+            dir = "desc";
+            switching = true;
+            }
+        }
+        }
     }
-</script> -->
+</script>

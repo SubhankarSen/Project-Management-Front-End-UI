@@ -194,7 +194,16 @@ export class UsertaskComponent implements OnInit {
       //   this.UsertaskID = params.get("id");
       //   this.UsertaskEdit(this.UsertaskID);
       // });
-      this.UsertaskID = this.Activatedroute.snapshot.paramMap.get("id");
+      // this.UsertaskID = this.Activatedroute.snapshot.paramMap.get("userTaskID");
+      this.Activatedroute.params.subscribe( params => 
+        {
+          console.log(params);
+          if (params["userTaskID"])
+          {
+           this.addupdatebutton = "Update Task";
+           this.UsertaskEdit(params['userTaskID'])
+          }
+        });
       // this.UsertaskEdit(this.UsertaskID);
   }
 

@@ -7,6 +7,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { ProjectAdd } from 'src/app/model/project-add';
+import { Usertask } from 'src/app/model/usertask';
 
 @Component({
   selector: 'app-project',
@@ -19,7 +20,7 @@ export class ProjectComponent implements OnInit {
   message:string;
   // FromProject:FormGroup;
   ProjectID:string = "0";
-  allProject:Observable<Project[]>;
+  allProject:Project[];
   allUser:User[];
   setdate = false;
   project:Project;
@@ -37,6 +38,9 @@ export class ProjectComponent implements OnInit {
       projPriority: ['',[Validators.required]],
       userID: ['',[Validators.required]],
     });
+  UserTaskCount: number = 0;
+  allUserTask: any;
+  UserTaskComplete: number = 0;
 
 
   constructor
@@ -55,8 +59,24 @@ export class ProjectComponent implements OnInit {
   GetProject()
   {
     debugger;
-    this.allProject = this.ProjectService.getProject();
-    console.log();
+    this.ProjectService.getProject().subscribe((p) =>
+    {
+      this.allProject = p;
+      this.allProject.forEach(Project => 
+        {
+          Project.userTasks.forEach(Usertask => 
+            {
+              this.UserTaskCount = this.UserTaskCount + 1;
+              if (Usertask.userTaskStatus = false)
+              {
+                this.UserTaskComplete = this.UserTaskComplete + 1;
+              }
+            });
+        });
+    });
+    console.log(this.allProject);
+    console.log(this.UserTaskCount);
+    console.log(this.UserTaskComplete);
   }
 
   Reset()

@@ -86,11 +86,11 @@
                 <tbody>  
                     <!-- <tr *ngFor="let User of allUser|async|"> -->
                     <!-- <tr ng-repeat="User in allUser|orderBy:propertyName:reverse"> -->
-                    <tr *ngFor="let Project of allProject|async">
+                    <tr *ngFor="let Project of allProject">
                         <td>{{Project.projectID}}</td>  
                         <td>{{Project.projectDesc}}</td>  
-                        <td>{{Project.projNoofTask}}</td>  
-                        <td>{{Project.projCompleted}}</td>  
+                        <td>{{UserTaskCount}}</td>  
+                        <td>{{UserTaskComplete}}</td>  
                         <td>{{Project.projStartDate}}</td>  
                         <td>{{Project.projEndDate}}</td>  
                         <td>{{Project.projPriority}}</td>    

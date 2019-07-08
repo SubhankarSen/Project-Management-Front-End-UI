@@ -17,7 +17,7 @@
                 </div> 
             </div>
         </form>
-        <label form="company">Sort By: </label>
+        <!-- <label form="company">Sort By: </label>
         <td>
             <button (click)="sortTable(1)" class="btn btn-primary">Start Date</button>  
         </td>       
@@ -29,91 +29,93 @@
         </td>
         <td>
             <button (click)="sortTable(3)" class="btn btn-primary">Completed</button> 
-        </td>
+        </td> -->
     </div>
     <div class="card-footer">
         <div class="col-lg-12 table-responsive">  
             <table class="table table-striped" id="userTask">
                 <thead>  
                     <tr>
-                        <th>Task ID</th>
-                        <th>Task</th>
-                        <th>Parent</th>
-                        <th>Priority</th> 
-                        <th>Start</th>  
-                        <th>End</th>  
+                        <th onclick="sortTable(0)">Task ID</th>
+                        <th onclick="sortTable(1)">Task</th>
+                        <th onclick="sortTable(2)">Parent</th>
+                        <th onclick="sortTable(3)">Priority</th> 
+                        <th onclick="sortTable(4)">Start</th>  
+                        <th onclick="sortTable(5)">End</th>  
                         <th></th>  
                     </tr> 
-                </thead>  
-                <tbody>  
-                    <!-- <tr *ngFor="let User of allUser|async|"> -->
-                    <!-- <tr ng-repeat="User in allUser|orderBy:propertyName:reverse"> -->
-                    <tr *ngFor="let Usertask of allUsertask|async">
+                </thead>
+                <tbody *ngIf ="projectID == ' ' || null || '0' ; else usertasklist">
+                <!-- <tbody> -->
+                    <tr *ngFor="let Usertask of allUsertask">
                         <td>{{Usertask.userTaskID}}</td>
                         <td>{{Usertask.userTaskDesc}}</td>  
-                        <td>{{Usertask.parentTaskDesc}}</td>  
+                        <td>{{Usertask.parentTask.parentTaskDesc || "$nbsp;"}}</td>  
                         <td>{{Usertask.userTaskPriority}}</td>  
                         <td>{{Usertask.userTaskStartDate}}</td>  
                         <td>{{Usertask.userTaskEndDate}}</td>    
                         <td>  
                             <!-- <button type="button" class="btn btn-primary mr-1" (click)="UsertaskEdit(Usertask.userTaskID)">Edit</button>   -->
-                            <button type="button" class="btn btn-danger mr-1" routerLink="/eusertask/{{Usertask.userTaskID}}">Edit</button>
+                            <!-- <button type="button" class="btn btn-primary mr-1" routerLink="/usertask/{{Usertask.userTaskID}}">Edit</button> -->
+                            <button type="button" class="btn btn-primary mr-1" (click)="UsertaskEdit(Usertask.userTaskID)">Edit</button>
                             <button type="button" class="btn btn-danger mr-1" (click)="EndUsertask(Usertask.userTaskID)">End Task</button>  
-                        </td>  
-                    </tr>  
-                </tbody>  
-            </table> 
+                        </td>
+                    </tr>
+                </tbody>
+                <ng-template #usertasklist>
+                <!-- <tbody> -->
+                    <!-- <tr *ngFor="let User of allUser|async|"> -->
+                    <!-- <tr ng-repeat="User in allUser|orderBy:propertyName:reverse"> -->
+                    <tr *ngFor="let Usertasklist of allUsertasklist">
+                        <td>{{Usertasklist.userTaskID}}</td>
+                        <td>{{Usertasklist.userTaskDesc}}</td>  
+                        <td>{{Usertasklist.parentTask.parentTaskDesc}}</td>  
+                        <td>{{Usertasklist.userTaskPriority}}</td>  
+                        <td>{{Usertasklist.userTaskStartDate}}</td>  
+                        <td>{{Usertasklist.userTaskEndDate}}</td>    
+                        <td>  
+                            <!-- <button type="button" class="btn btn-primary mr-1" (click)="UsertaskEdit(Usertask.userTaskID)">Edit</button>   -->
+                            <button type="button" class="btn btn-primary mr-1" (click)="UsertaskEdit(Usertasklist.userTaskID)">Edit</button>
+                            <button type="button" class="btn btn-danger mr-1" (click)="EndUsertask(Usertasklist.userTaskID)">End Task</button>  
+                        </td>
+                    </tr>
+                <!-- </tbody> -->
+                </ng-template>
+            </table>
         </div>
     </div>
 </div>
-<!-- <script>
+
+<script>
     function sortTable(n) {
         var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
         table = document.getElementById("userTask");
         switching = true;
-        //Set the sorting direction to ascending:
         dir = "asc"; 
-        /*Make a loop that will continue until
-        no switching has been done:*/
         while (switching) {
-        //start by saying: no switching is done:
         switching = false;
         rows = table.rows;
-        /*Loop through all table rows (except the
-        first, which contains table headers):*/
         for (i = 1; i < (rows.length - 1); i++) {
-            //start by saying there should be no switching:
             shouldSwitch = false;
-            /*Get the two elements you want to compare,
-            one from current row and one from the next:*/
-            x = rows[i].getElementsByTagName("TD")[n];
-            y = rows[i + 1].getElementsByTagName("TD")[n];
-            /*check if the two rows should switch place,
-            based on the direction, asc or desc:*/
+            x = rows[i].getElementsByTagName("td")[n];
+            y = rows[i + 1].getElementsByTagName("td")[n];
             if (dir == "asc") {
             if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                //if so, mark as a switch and break the loop:
                 shouldSwitch= true;
                 break;
             }
             } else if (dir == "desc") {
             if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                //if so, mark as a switch and break the loop:
                 shouldSwitch = true;
                 break;
             }
             }
         }
         if (shouldSwitch) {
-            /*If a switch has been marked, make the switch
-            and mark that a switch has been done:*/
             rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
             switching = true;
-            //Each time a switch is done, increase this count by 1:
             switchcount ++;      
         } else {
-            /*If no switching has been done AND the direction is "asc",
-            set the direction to "desc" and run the while loop again.*/
             if (switchcount == 0 && dir == "asc") {
             dir = "desc";
             switching = true;
@@ -121,4 +123,4 @@
         }
         }
     }
-</script>  -->
+</script> 

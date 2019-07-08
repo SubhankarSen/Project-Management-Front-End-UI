@@ -1,11 +1,9 @@
-import { Project } from './project';
 import { Parenttask } from './parenttask';
 import { User } from './user';
 
-export class Usertask 
+export class Usertasklist 
 {
     public parentTask:Parenttask;
-    public project:Project;
     public user:User;
     public userTaskID: string;
     public userTaskDesc: string;
@@ -16,15 +14,4 @@ export class Usertask
     public projectID: string;
     public parentTaskID: string;
     public userID: string;
-    
-
-    // projectID: number;
-    // projectDesc: string;
-    
-    // parentTaskID: number;
-    // parentTaskDesc: string;
-    
-    // userID: number;
-    // userFirstName: string;
-    // userLastName: string;
 }

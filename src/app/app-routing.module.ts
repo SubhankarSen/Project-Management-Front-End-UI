@@ -13,7 +13,7 @@ const routes: Routes = [];
     { path: 'user', component: UserComponent },
     { path: 'usertask', component: UsertaskComponent },
     // { path: 'usertask', redirectTo: 'usertask/' },
-    { path: 'eusertask/:id', component: UsertaskComponent },
+    // { path: 'usertask/:id', component: UsertaskComponent },
     { path: 'viewtask', component: ViewtaskComponent },
     { path: '', redirectTo: '/project', pathMatch: 'full' }
       ]),

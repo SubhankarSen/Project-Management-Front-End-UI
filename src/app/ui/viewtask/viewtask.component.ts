@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usertask } from 'src/app/model/usertask';
+import { Usertasklist } from 'src/app/model/usertasklist';
 import { ProjectService } from 'src/app/services/project.service';
 import { UsertaskService } from 'src/app/services/usertask.service';
 import { DatePipe } from '@angular/common';
@@ -17,10 +18,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class ViewtaskComponent implements OnInit {
 
   allProject: Project[];
-  allUsertask: Observable<Usertask[]>;
+  allUsertask: Usertask[];
+  allUsertasklist: Usertasklist[];
   ProjectID: any = "0";
   Project: Project;
   Usertask: Usertask;
+  Usertasklist: Usertasklist;
+  Parenttask:Parenttask;
   // FromViewtask:FormGroup;
   FromViewtask = this.formbuilder.group(
     {
@@ -39,13 +43,25 @@ export class ViewtaskComponent implements OnInit {
   GetUsertask()
   {
     debugger;
-    this.allUsertask = this.UsertaskService.getUsertask();
-    console.log();
+    this.UsertaskService.getUsertask().subscribe((u)=>
+    {
+      this.allUsertask=u;
+      this.allUsertask.forEach(userTask => 
+        {
+          if(userTask.parentTaskID = null)
+          {
+            userTask.parentTask.parentTaskDesc = " ";
+          }
+        });
+    });
+    // this.allUsertask = this.UsertaskService.getUsertask();
+    console.log(this.allUsertask);
   }
 
   GetProject(p:any)
   {
     this.ProjectService.getProject().subscribe((p)=>{this.allProject=p;});
+    console.log(this.allProject);
   }
 
   // GetProject(ProjectID:string)
@@ -69,11 +85,29 @@ export class ViewtaskComponent implements OnInit {
 
   GetProjectByID(ProjectID)
   {
-    this.ProjectService.getProjectById(ProjectID).subscribe((p)=>{this.Project=p;});
+    console.log(ProjectID);
+    this.ProjectService.getProjectById(ProjectID).subscribe((p)=>
+    {
+      this.Project=p;
+      this.allUsertasklist = p.userTasks;
+      this.allUsertasklist.forEach(userTask => 
+        {
+          if(userTask.parentTaskID = null)
+          {
+            userTask.parentTask.parentTaskDesc = " ";
+          }
+        });
+    });
+    console.log(this.Project);
+    console.log(this.allUsertasklist);
     // this.ProjectService.getProjectById(ProjectID).subscribe((p)=>{
     //   this.ProjectID = p.projectID;
     // });
-    this.allUsertask = Project.usertask;
+
+    // this.allUsertasklist = this.Project.userTasks;
+    // // console.log(this.allUsertasklist);
+    // console.log(this.Project.userTasks);
+    // // this.allUsertask = this.allUsertasklist;
   }
 
   Reset()
@@ -92,9 +126,9 @@ export class ViewtaskComponent implements OnInit {
       });
   }
 
-  UsertaskEdit(UsertaskID)
+  UsertaskEdit(UsertaskID:string)
   {
-      this.router.navigate(['/usertask/'],UsertaskID);
+      this.router.navigate(["usertask",{UsertaskID: UsertaskID}]);
   }
 
   ngOnInit()

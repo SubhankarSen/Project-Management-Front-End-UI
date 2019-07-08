@@ -1,17 +1,18 @@
 import { User } from './user';
 import { Usertask } from './usertask';
+import { Usertasklist } from './usertasklist';
 
 export class Project 
 {
-    user:User;
-    usertask:Usertask[];
-    projectID: string;
-    projectDesc: string;
-    projStartDate: Date;
-    projEndDate: Date;
-    projPriority: string;
-    userID: string;
-  static usertask: any;
+  public user:User;
+  public userTasks:Usertasklist[];
+  public projectID: string;
+  public projectDesc: string;
+  public projStartDate: Date;
+  public projEndDate: Date;
+  public projPriority: string;
+  public userID: string;
+  // static usertask: any;
     
     // userID: string;
     // projusertask:Usertask;

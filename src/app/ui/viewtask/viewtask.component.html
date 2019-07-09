@@ -59,7 +59,7 @@
                     </tr>
                 </tbody>
                 <ng-template #usertasklist>
-                    <tr *ngFor="let Usertasklist of allUsertasklist">
+                    <tr *ngFor="let Usertasklist of allUsertasklist  | orderBy: sortingName: isDesc">
                         <td>{{Usertasklist.userTaskID}}</td>
                         <td>{{Usertasklist.userTaskDesc}}</td>  
                         <td *ngIf="!Usertasklist.parentTask ; else showvalue">&nbsp;</td>

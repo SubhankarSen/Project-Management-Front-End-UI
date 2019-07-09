@@ -59,20 +59,20 @@ export class UsertaskComponent implements OnInit {
   
     AddUpdateUsertask(Usertask:Usertask)
     {
-      if ((Usertask.projectID == " " || null) || (Usertask.userTaskDesc == " " || null) || (Usertask.userTaskPriority == 0 || null) || (Usertask.userID == " " || null))
-      {
-        alert("Please Enter all the Task Details");
-        return;
-      }
-      if (Usertask.userTaskStartDate >= Usertask.userTaskEndDate)
-      {
-        alert("Start Date cannot be greater or equal to End Date");
-        return;
-      }
       debugger;
       if (this.UsertaskID == "0" || null || ' ')
       {
         Usertask.userTaskID = this.UsertaskID;
+        if ((Usertask.projectID == " " || null) || (Usertask.userTaskDesc == " " || null) || (Usertask.userTaskPriority == 0 || null) || (Usertask.userID == " " || null))
+        {
+          alert("Please Enter all the Task Details");
+          return;
+        }
+        if (Usertask.userTaskStartDate >= Usertask.userTaskEndDate)
+        {
+          alert("Start Date cannot be greater or equal to End Date");
+          return;
+        }
         Usertask.userTaskStatus = true;
         this.UsertaskService.CreateUsertask(Usertask).subscribe(() => 
         {
@@ -85,6 +85,16 @@ export class UsertaskComponent implements OnInit {
       else
       {
         Usertask.userTaskID = this.UsertaskID;
+        if ((Usertask.projectID == " " || null) || (Usertask.userTaskDesc == " " || null) || (Usertask.userTaskPriority == 0 || null) || (Usertask.userID == " " || null))
+        {
+          alert("Please Enter all the Task Details");
+          return;
+        }
+        if (Usertask.userTaskStartDate >= Usertask.userTaskEndDate)
+        {
+          alert("Start Date cannot be greater or equal to End Date");
+          return;
+        }
         this.UsertaskService.UpdateUsertask(Usertask).subscribe(() =>
         {
           this.dataSaved = true;

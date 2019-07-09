@@ -81,16 +81,17 @@ export class ViewtaskComponent implements OnInit {
 
   EndUsertask(UsertaskID:string)
   {
-    this.UsertaskService.getUsertaskById(UsertaskID).subscribe(Usertask =>
+    this.UsertaskService.getUsertaskById(UsertaskID).subscribe(u =>
       {
+        this.Usertask = u;
         debugger;
-        if (Usertask.userTaskStatus == false)
+        if (this.Usertask.userTaskStatus == false)
         {
           alert("Task is already Inactive. Task cannot be Ended");
           return;
         }
-        Usertask.userTaskStatus = false;
-        this.UsertaskService.UpdateUsertask(Usertask).subscribe(() => {});
+        this.Usertask.userTaskStatus = false;
+        this.UsertaskService.UpdateUsertask(this.Usertask).subscribe(() => {});
       });
   }
 

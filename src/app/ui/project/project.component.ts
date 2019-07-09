@@ -7,6 +7,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { Usertasklist } from 'src/app/model/usertasklist';
+import { OrderPipe } from 'ngx-order-pipe';
 
 @Component({
   selector: 'app-project',
@@ -41,13 +42,16 @@ export class ProjectComponent implements OnInit {
   UserTaskComplete: number[];
   i: number = 0;
   j: number = 0;
+  sortingName: string;
+  isDesc: boolean;
 
 
   constructor
   (private formbuilder:FormBuilder,
     private ProjectService:ProjectService,
     private UserService:UserService,
-    private datePipe:DatePipe
+    private datePipe:DatePipe,
+    private orderPipe: OrderPipe
     ) { }
   
   GetProject()
@@ -180,5 +184,14 @@ export class ProjectComponent implements OnInit {
   get userID()
   {
     return this.FromProject.get('userID');
+  }
+
+  sort(name: string): void {
+    if (name && this.sortingName !== name) {
+      this.isDesc = false;
+    } else {
+      this.isDesc = !this.isDesc;
+    }
+    this.sortingName = name;
   }
 }

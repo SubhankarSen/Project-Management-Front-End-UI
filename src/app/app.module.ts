@@ -10,6 +10,7 @@ import { UserComponent } from './ui/user/user.component';
 import { UsertaskComponent } from './ui/usertask/usertask.component';
 import { DatePipe } from '@angular/common';
 import { ViewtaskComponent } from './ui/viewtask/viewtask.component';
+import {OrderModule} from 'ngx-order-pipe'
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ViewtaskComponent } from './ui/viewtask/viewtask.component';
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    OrderModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

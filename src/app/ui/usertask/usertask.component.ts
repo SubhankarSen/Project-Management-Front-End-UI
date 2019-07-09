@@ -60,7 +60,7 @@ export class UsertaskComponent implements OnInit {
     AddUpdateUsertask(Usertask:Usertask)
     {
       debugger;
-      if (this.UsertaskID == "0" || null || ' ')
+      if (this.UsertaskID == "0" || null)
       {
         Usertask.userTaskID = this.UsertaskID;
         if ((Usertask.projectID == " " || null) || (Usertask.userTaskDesc == " " || null) || (Usertask.userTaskPriority == 0 || null) || (Usertask.userID == " " || null))
@@ -134,7 +134,7 @@ export class UsertaskComponent implements OnInit {
           debugger;
           this.UsertaskID = Response.userTaskID;
           this.FromUsertask.controls['projectID'].setValue(Response.projectID);
-          this.FromUsertask.controls['usertaskDesc'].setValue(Response.userTaskDesc);
+          this.FromUsertask.controls['userTaskDesc'].setValue(Response.userTaskDesc);
           this.FromUsertask.controls['userTaskPriority'].setValue(Response.userTaskPriority);
           this.FromUsertask.controls['parentTaskID'].setValue(Response.parentTaskID);
           this.FromUsertask.controls['userTaskStartDate'].setValue(Response.userTaskStartDate);
@@ -185,11 +185,15 @@ export class UsertaskComponent implements OnInit {
 
       this.Activatedroute.params.subscribe( params => 
         {
-          console.log(params);
-          if (params["userTaskID"])
+          console.log(params.UsertaskID);
+          if (params.UsertaskID == null)
+          {
+            console.log(params);
+          }
+          else
           {
            this.addupdatebutton = "Update Task";
-           this.UsertaskEdit(params['userTaskID'])
+           this.UsertaskEdit(params.UsertaskID)
           }
         });
   }

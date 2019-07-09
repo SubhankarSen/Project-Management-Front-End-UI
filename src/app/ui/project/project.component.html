@@ -58,16 +58,16 @@
         </form>
         <label form="company">Sort By: </label>
         <td>
-            <button (click)="sortTable(1)" class="btn btn-primary">Start Date</button>  
+            <button (click)="sort('projStartDate')" class="btn btn-primary">Start Date</button>  
         </td>       
         <td>
-            <button (click)="sortTable(2)" class="btn btn-primary">End Date</button> 
+            <button (click)="sort('projectEndDate')" class="btn btn-primary">End Date</button> 
         </td>
         <td>
-            <button (click)="sortTable(0)" class="btn btn-primary">Priority</button> 
+            <button (click)="sort('projPriority')" class="btn btn-primary">Priority</button> 
         </td>
         <td>
-            <button (click)="sortTable(3)" class="btn btn-primary">Completed</button> 
+            <button (click)="sort('userTaskCompletedCount')" class="btn btn-primary">Completed</button> 
         </td>
     </div>
     <div class="card-footer">
@@ -86,7 +86,7 @@
                     </tr> 
                 </thead>  
                 <tbody>  
-                    <tr *ngFor="let Project of allProject">
+                    <tr *ngFor="let Project of allProject | orderBy: sortingName: isDesc">
                         <td>{{Project.projectID}}</td>  
                         <td>{{Project.projectDesc}}</td>  
                         <td>{{Project.userTaskCount}}</td>  
@@ -104,57 +104,3 @@
         </div>  
     </div>  
 </div>
-
-<script>
-    function setdate()
-    {
-        var x=document.getElementById("setDate");
-        var sd=document.getElementById("projectStartDate");
-        var ed=document.getElementById("projectEndDate");
-        if (x.checked)
-        {
-            sd.enabled=true; ed.enabled=true;
-        }
-        else
-        {
-            sd.enabled=false; ed.enabled=false;
-        }
-    }
-
-    function sortTable(n) {
-        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-        table = document.getElementById("projectTable");
-        switching = true;
-        dir = "asc"; 
-        while (switching) {
-        switching = false;
-        rows = table.rows;
-        for (i = 1; i < (rows.length - 1); i++) {
-            shouldSwitch = false;
-            x = rows[i].getElementsByTagName("td")[n];
-            y = rows[i + 1].getElementsByTagName("td")[n];
-            if (dir == "asc") {
-            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                shouldSwitch= true;
-                break;
-            }
-            } else if (dir == "desc") {
-            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                shouldSwitch = true;
-                break;
-            }
-            }
-        }
-        if (shouldSwitch) {
-            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-            switching = true;
-            switchcount ++;      
-        } else {
-            if (switchcount == 0 && dir == "asc") {
-            dir = "desc";
-            switching = true;
-            }
-        }
-        }
-    }
-</script>

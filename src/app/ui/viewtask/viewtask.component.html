@@ -16,16 +16,16 @@
         </form>
         <label form="company">Sort Task By: </label>
         <td>
-            <button (click)="sortTable(1)" class="btn btn-primary">Start Date</button>  
+            <button (click)="sort('userTaskStartDate')" class="btn btn-primary">Start Date</button>  
         </td>       
         <td>
-            <button (click)="sortTable(2)" class="btn btn-primary">End Date</button> 
+            <button (click)="sort('userTaskEndDate')" class="btn btn-primary">End Date</button> 
         </td>
         <td>
-            <button (click)="sortTable(0)" class="btn btn-primary">Priority</button> 
+            <button (click)="sort('userTaskPriority')" class="btn btn-primary">Priority</button> 
         </td>
         <td>
-            <button (click)="sortTable(3)" class="btn btn-primary">Completed</button> 
+            <button (click)="sort('userTaskStatus')" class="btn btn-primary">Completed</button> 
         </td>
     </div>
     <div class="card-footer">
@@ -43,7 +43,8 @@
                     </tr> 
                 </thead>
                 <tbody *ngIf="!Project ; else usertasklist">
-                    <tr *ngFor="let Usertask of allUsertask">
+                    <!-- <tr *ngFor="let Usertask of allUsertask"> -->
+                    <tr *ngFor="let Usertask of allUsertask | orderBy: sortingName: isDesc">
                         <td>{{Usertask.userTaskID}}</td>
                         <td>{{Usertask.userTaskDesc}}</td>  
                         <td *ngIf="!Usertask.parentTask ; else showvalue">&nbsp;</td>

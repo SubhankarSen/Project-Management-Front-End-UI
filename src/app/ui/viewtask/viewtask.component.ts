@@ -9,6 +9,7 @@ import { Project } from 'src/app/model/project';
 import { Observable } from 'rxjs';
 import { Parenttask } from 'src/app/model/parenttask';
 import { Router, ActivatedRoute } from '@angular/router';
+import { OrderPipe } from 'ngx-order-pipe';
 
 @Component({
   selector: 'app-viewtask',
@@ -30,6 +31,8 @@ export class ViewtaskComponent implements OnInit {
     {
       projectID: ['',[Validators.required]],
     });
+  sortingName: string;
+  isDesc: boolean;
 
 
   constructor(
@@ -37,7 +40,8 @@ export class ViewtaskComponent implements OnInit {
     private ProjectService:ProjectService,
     private UsertaskService:UsertaskService,
     private datePipe:DatePipe,
-    private router:Router
+    private router:Router,
+    private orderPipe: OrderPipe
   ) { }
 
   GetUsertask()
@@ -110,5 +114,14 @@ export class ViewtaskComponent implements OnInit {
     this.Reset();
     this.GetUsertask();
     console.log();
+  }
+  
+  sort(name: string): void {
+    if (name && this.sortingName !== name) {
+      this.isDesc = false;
+    } else {
+      this.isDesc = !this.isDesc;
+    }
+    this.sortingName = name;
   }
 }

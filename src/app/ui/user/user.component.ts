@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { User } from 'src/app/model/user';
 import { UserService } from 'src/app/services/user.service';
 import {NgForm,FormBuilder,FormGroup,Validators,FormControl} from '@angular/forms'
-import { stringify } from '@angular/compiler/src/util';
+import { OrderPipe } from 'ngx-order-pipe';
 
 @Component({
   selector: 'app-user',
@@ -16,15 +16,20 @@ export class UserComponent implements OnInit {
   message:string;
   FromUser:FormGroup;
   UserID:string = "0";
-  allUser:Observable<User[]>;
+  allUser:User[];
   addupdatebutton: string = "Add User";
+  sortingName: string;
+  isDesc: boolean;
 
-  constructor(private formbuilder:FormBuilder,private UserService:UserService) { }
+  constructor(private formbuilder:FormBuilder,private UserService:UserService,private orderPipe: OrderPipe) { }
 
   GetUser()
   {
     debugger;
-    this.allUser = this.UserService.getUser();
+    this.UserService.getUser().subscribe((u) => 
+    {
+      this.allUser = u;
+    });
   }
 
   Reset()
@@ -99,6 +104,15 @@ export class UserComponent implements OnInit {
         this.FromUser.controls['userLastName'].setValue(Response.userLastName);
         this.FromUser.controls['userEmployeeID'].setValue(Response.userEmployeeID);
       });
+  }
+
+  sort(name: string): void {
+    if (name && this.sortingName !== name) {
+      this.isDesc = false;
+    } else {
+      this.isDesc = !this.isDesc;
+    }
+    this.sortingName = name;
   }
     
   ngOnInit():void {

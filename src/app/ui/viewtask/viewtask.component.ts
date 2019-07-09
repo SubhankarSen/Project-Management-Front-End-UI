@@ -26,7 +26,6 @@ export class ViewtaskComponent implements OnInit {
   Usertasklist: Usertasklist;
   Parenttask:Parenttask;
   UserTaskDesc: string;
-  // FromViewtask:FormGroup;
   FromViewtask = this.formbuilder.group(
     {
       projectID: ['',[Validators.required]],
@@ -47,15 +46,7 @@ export class ViewtaskComponent implements OnInit {
     this.UsertaskService.getUsertask().subscribe((u)=>
     {
       this.allUsertask=u;
-      // this.allUsertask.forEach(userTask => 
-      //   {
-      //     if(userTask.parentTaskID = null)
-      //     {
-      //       userTask.parentTask.parentTaskDesc = "&nbsp;";
-      //     }
-      //   });
     });
-    // this.allUsertask = this.UsertaskService.getUsertask();
     console.log(this.allUsertask);
   }
 
@@ -65,23 +56,10 @@ export class ViewtaskComponent implements OnInit {
     console.log(this.allProject);
   }
 
-  // GetProject(ProjectID:string)
-  // {
-  //   this.ProjectService.getProjectById(ProjectID).subscribe((p)=>{this.Project=p;});
-  // }
-
   get projectID()
   {
     this.ProjectID = this.FromViewtask.get('projectID');
     return this.ProjectID;
-    // this.GetProjectByID(this.ProjectID);
-
-    // console.log(this.ProjectID);
-    // this.ProjectService.getProjectById(this.ProjectID).subscribe((p)=>{this.Project=p;});
-    // console.log(this.ProjectID);
-    // this.allUsertask = Project.usertask;
-    // console.log(this.allUsertask);
-    // return this.ProjectID
   }
 
   GetProjectByID(ProjectID)
@@ -91,28 +69,9 @@ export class ViewtaskComponent implements OnInit {
     {
       this.Project=p;
       this.allUsertasklist = p.userTasks;
-      // this.allUsertasklist.forEach(userTask => 
-      //   {
-      //     if(userTask.parentTaskID = null)
-      //     {
-      //       this.UserTaskDesc = " ";
-      //     }
-      //     else
-      //     {
-      //       this.UserTaskDesc = userTask.parentTask.parentTaskDesc;
-      //     }
-      //   });
     });
     console.log(this.Project);
     console.log(this.allUsertasklist);
-    // this.ProjectService.getProjectById(ProjectID).subscribe((p)=>{
-    //   this.ProjectID = p.projectID;
-    // });
-
-    // this.allUsertasklist = this.Project.userTasks;
-    // // console.log(this.allUsertasklist);
-    // console.log(this.Project.userTasks);
-    // // this.allUsertask = this.allUsertasklist;
   }
 
   Reset()
@@ -125,7 +84,11 @@ export class ViewtaskComponent implements OnInit {
     this.UsertaskService.getUsertaskById(UsertaskID).subscribe(Usertask =>
       {
         debugger;
-        // UsertaskID = u.userTaskID;
+        if (Usertask.userTaskStatus = false)
+        {
+          alert("Task is already Inactive. Task cannot be Ended");
+          return;
+        }
         Usertask.userTaskStatus = false;
         this.UsertaskService.UpdateUsertask(Usertask).subscribe(() => {});
       });

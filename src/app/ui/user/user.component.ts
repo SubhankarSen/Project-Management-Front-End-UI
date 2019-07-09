@@ -32,21 +32,13 @@ export class UserComponent implements OnInit {
     this.FromUser.reset();
   }
 
-  /* AddUser(User:User)
-  {
-    debugger;
-    User.userID = this.UserID;
-    this.UserService.CreateUser(User).subscribe(() => 
-    {
-        this.dataSaved = true;
-        this.message = 'User saved Successfully';
-        this.GetUser();
-        this.Reset();
-        this.UserID = "0";
-      });
-  } */
   AddUpdateUser(User:User)
   {
+    if (User.userFirstName=="" || User.userLastName=="" || User.userEmployeeID==null)
+    {
+      alert("Input Field should not be blank")
+      return;
+    }
     debugger;
     if (this.UserID == "0" || null)
     {

@@ -16,15 +16,4 @@ export class Usertask
     public projectID: string;
     public parentTaskID: string;
     public userID: string;
-    
-
-    // projectID: number;
-    // projectDesc: string;
-    
-    // parentTaskID: number;
-    // parentTaskDesc: string;
-    
-    // userID: number;
-    // userFirstName: string;
-    // userLastName: string;
 }

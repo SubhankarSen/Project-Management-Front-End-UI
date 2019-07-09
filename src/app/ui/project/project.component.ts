@@ -17,7 +17,6 @@ export class ProjectComponent implements OnInit {
 
   dataSaved = false;
   message:string;
-  // FromProject:FormGroup;
   ProjectID:string = "0";
   allProject:Project[];
   allUser:User[];
@@ -49,12 +48,6 @@ export class ProjectComponent implements OnInit {
     private ProjectService:ProjectService,
     private UserService:UserService,
     private datePipe:DatePipe
-    // dataSaved = false;
-  // message:string;
-  /* FromProject:FormGroup,
-  ProjectID:string = "0",
-  allProject:Observable<Project[]>,
-  allUser:Observable<User[]> */
     ) { }
   
   GetProject()
@@ -80,7 +73,6 @@ export class ProjectComponent implements OnInit {
             console.log(Project.userTaskCompletedCount);
         });
     });
-    // console.log(this.allProject);
   }
 
   Reset()
@@ -89,9 +81,17 @@ export class ProjectComponent implements OnInit {
     this.showDropDown = false;
   }
 
-  // AddUpdateProject(Project:ProjectAdd)
   AddUpdateProject(Project:Project)
   {
+    if ((Project.projectDesc = " " || null) || (Project.projPriority = " " || null) || (Project.userID = " " || null))
+    {
+      alert("Please enter project details");
+      return;
+    }
+    if (Project.projStartDate >= Project.projEndDate){
+      alert("Start Date cannot be greater than End Date");
+      return;
+    }
     debugger;
     if (this.ProjectID == "0" || null)
     {
@@ -149,42 +149,13 @@ export class ProjectComponent implements OnInit {
         this.FromProject.controls['projEndDate'].setValue(Response.projEndDate);
         this.FromProject.controls['projPriority'].setValue(Response.projPriority);
         this.FromProject.controls['userID'].setValue(Response.userID);
-        // this.FromProject.controls['userLastName'].setValue(Response.user.userLastName);
-        // this.FromProject.controls['userEmployeeID'].setValue(Response.userEmployeeID);
       });
   }
 
-  // setDate(e)
-  // {
-  //   this.setdate = e.target.checked;
-  //   if (this.setdate == true)
-  //   {
-  //     this.project.projStart_Date = this.datePipe.transform(this.todayDate, 'yyyy-MM-dd');
-  //     this.project.projEnd_Date = this.datePipe.transform(this.tomorrowDate, 'yyyy-MM-dd');
-  //     // alert('button checked');
-  //   }
-  //   else
-  //   {
-  //     this.project.projStart_Date = '';
-  //     this.project.projEnd_Date = '';
-  //     // alert('button unchecked');
-  //   }
-  // }
-
   ngOnInit() 
   {
-    /* this.FromProject = this.formbuilder.group(
-      {
-        projectID: ['',[Validators.required]],
-        projectDesc: ['',[Validators.required]],
-        projStartDate: ['',[Validators.required]],
-        projEndDate: ['',[Validators.required]],
-        projPriority: ['',[Validators.required]],
-        userID: ['',[Validators.required]],
-      }); */
       this.Reset();
       this.GetProject();
-      // this.GetUser();
       this.todayDate = new Date();
       this.tomorrowDate = new Date();
       this.tomorrowDate.setDate(this.tomorrowDate.getDate()+1);
@@ -194,34 +165,11 @@ export class ProjectComponent implements OnInit {
   GetUser(e:any)
   {
     console.log(e.value);
-    // this.allUser = this.UserService.getUser();
     this.UserService.getUser().subscribe((u)=>{this.allUser=u;});
-    // this.userID.setValue(e.target.value,{onlySelf:true})
   }
 
   get userID()
   {
     return this.FromProject.get('userID');
   }
-
-  // onKeyDownAction(e):void
-  // {
-  //   this.showDropDown=true;
-  //   this.allUser = this.UserService.getUser();
-  //   this.userID = this.allUser[this.user.userID][this.user.userFirstName][this.user.userLastName];
-  // }
-
-  // toggledropdown():void
-  // {
-  //   this.showDropDown = !this.showDropDown;
-  // }
-
-  // GetUser(value)
-  // {
-  //   this.userID = [];
-  //   if(value > 0)
-  //   {
-  //     this.userID = this.User.transform(this.)
-  //   }
-  // }
 }

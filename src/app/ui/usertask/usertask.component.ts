@@ -40,22 +40,9 @@ export class UsertaskComponent implements OnInit {
     private Activatedroute:ActivatedRoute,
     ) { }
 
-    // GetProject()
-    // {
-    //   debugger;
-    //   this.allProject = this.ProjectService.getProject();
-    // }
-
-    // GetUser()
-    // {
-    //   debugger;
-    //   this.allUser = this.UserService.getUser();
-    // }
-
     GetUsertask(t:any)
     {
       debugger;
-      // this.allUsertask = this.UsertaskService.getUsertask();
       console.log(t.value);
       this.UsertaskService.getUsertask().subscribe((t)=>{this.allUsertask=t;});
     }
@@ -72,6 +59,16 @@ export class UsertaskComponent implements OnInit {
   
     AddUpdateUsertask(Usertask:Usertask)
     {
+      if ((Usertask.projectID = " " || null) || (Usertask.userTaskDesc = " " || null) || (Usertask.userTaskPriority = 0 || null) || (Usertask.userID = " " || null))
+      {
+        alert("Please Enter all the Task Details");
+        return;
+      }
+      if (Usertask.userTaskStartDate >= Usertask.userTaskEndDate)
+      {
+        alert("Start Date cannot be greater or equal to End Date");
+        return;
+      }
       debugger;
       if (this.UsertaskID == "0" || null || ' ')
       {
@@ -81,7 +78,6 @@ export class UsertaskComponent implements OnInit {
         {
             this.dataSaved = true;
             this.message = 'Task saved Successfully';
-            // this.GetProject();
             this.Reset();
             this.UsertaskID = "0";
         });
@@ -93,7 +89,6 @@ export class UsertaskComponent implements OnInit {
         {
           this.dataSaved = true;
           this.message = 'Task Update Succussfully';
-          // this.GetProject();
           this.Reset();
           this.UsertaskID = "0";
         });
@@ -108,7 +103,6 @@ export class UsertaskComponent implements OnInit {
         {
           this.dataSaved = true;
           this.message = 'Task Deleted Successfully';
-          // this.GetProject();
         });
       }
     }
@@ -120,6 +114,11 @@ export class UsertaskComponent implements OnInit {
       this.addupdatebutton = "Update Task";
       this.UsertaskService.getUsertaskById(UsertaskID).subscribe(Response =>
         {
+          if (Response.userTaskStatus = false)
+        {
+          alert("Task is already Inactive. Task cannot be Edited");
+          return;
+        }
           this.message = null;
           this.dataSaved = false;
           debugger;
@@ -131,17 +130,13 @@ export class UsertaskComponent implements OnInit {
           this.FromUsertask.controls['userTaskStartDate'].setValue(Response.userTaskStartDate);
           this.FromUsertask.controls['userTaskEndDate'].setValue(Response.userTaskEndDate);
           this.FromUsertask.controls['userID'].setValue(Response.userID);
-          // this.FromProject.controls['userLastName'].setValue(Response.user.userLastName);
-          // this.FromProject.controls['userEmployeeID'].setValue(Response.userEmployeeID);
         });
     }
 
     GetUser(u:any)
     {
       console.log(u.value);
-      // this.allUser = this.UserService.getUser();
       this.UserService.getUser().subscribe((u)=>{this.allUser=u;});
-      // this.userID.setValue(e.target.value,{onlySelf:true})
     }
   
     get userID()
@@ -152,9 +147,7 @@ export class UsertaskComponent implements OnInit {
     GetProject(p:any)
     {
       console.log(p.value);
-      // this.allUser = this.UserService.getUser();
       this.ProjectService.getProject().subscribe((p)=>{this.allProject=p;});
-      // this.userID.setValue(e.target.value,{onlySelf:true})
     }
 
     get ProjectID()
@@ -162,18 +155,11 @@ export class UsertaskComponent implements OnInit {
       return this.FromUsertask.get('projectID');
     }
 
-  // GetUsertask(e:any)
-  // {
-  //   console.log(e.value);
-  //   this.ParenttaskService.getParenttask().subscribe((t)=>{this.allParenttask=t;});
-  // }
-
   ngOnInit() {
 
     this.FromUsertask = this.formbuilder.group(
       {
         userTaskID: ['',[Validators.required]],
-        // userTaskStatus: ['',[Validators.required]],
         userTaskDesc: ['',[Validators.required]],
         userTaskStartDate: ['',[Validators.required]],
         userTaskEndDate: ['',[Validators.required]],
@@ -182,19 +168,11 @@ export class UsertaskComponent implements OnInit {
         projectID: ['',[Validators.required]],
         userID: ['',[Validators.required]],
       });
-      // this.GetUsertask();
-      // this.GetUser();
+
       this.todayDate = new Date();
       this.tomorrowDate = new Date();
       this.tomorrowDate.setDate(this.tomorrowDate.getDate()+1);
 
-      // this.Viewtaskparam = this.Activatedroute.paramMap.subscribe(params => {
-      //   debugger;
-      //   console.log(params);
-      //   this.UsertaskID = params.get("id");
-      //   this.UsertaskEdit(this.UsertaskID);
-      // });
-      // this.UsertaskID = this.Activatedroute.snapshot.paramMap.get("userTaskID");
       this.Activatedroute.params.subscribe( params => 
         {
           console.log(params);
@@ -204,7 +182,5 @@ export class UsertaskComponent implements OnInit {
            this.UsertaskEdit(params['userTaskID'])
           }
         });
-      // this.UsertaskEdit(this.UsertaskID);
   }
-
 }

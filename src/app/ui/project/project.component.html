@@ -31,29 +31,17 @@
             </div>
             <div class="row">
                 <div class="form-group form-inline mr-sm-3 col-sm-3">
-                    <!-- <input type="range" class="slider" id="priority" min="1" max="30" value="10" onclick="document.getElementById('prioritydisp').innerHTML = " -->
                     <label form="company"> Priority: </label><input type="range" min="0" max="30" class="slider" id="priority" formControlName="projPriority" oninput="prioritydisp.value=priority.value">
-                    <!-- <p><span id="prioritydisp"></span></p> -->
                     <output id="prioritydisp" name="prioritydisp" for="priority">0</output>
                 </div>
             </div>
             <div class="row">  
                 <div class="form-group">
                     <label form="company">Manager:</label> 
-                    <!-- <select class="form-control" id="userID" name="userID" formControlName="userID" (select)="GetUser()"> -->
                     <select class="form-control custom-select" id="userID" name="userID" formControlName="userID" (change)="GetUser($event)">
                         <option value="disabled">Choose Manager</option>
                         <option *ngFor="let User of allUser" [value]="User.userID" >{{User.userFirstName}} {{User.userLastName}}</option>
                     </select>
-                    <!-- <span class="form-control drop-down">
-                        <input type="text" class="form-control" formControlName="userID" (ngModelChange)="GetUser($event)" (keyup)="onKeyDownAction($event)"/>
-                        <button class="drop-down-button" (click)="toggleDropDown()"><i class="fa fa-angle-down"></i></button>
-                    </span>
-                    <span>
-                        <div class="form-control" *ngIf="showDropDown">
-                            <p *ngFor="let u of userID;let i=index" (click)="updateTextBox(u[userFirstName]">{{u[userFirstName]}}</p>
-                        </div>
-                    </span> -->
                 </div>
             </div>
             <div class="row">  
@@ -98,8 +86,6 @@
                     </tr> 
                 </thead>  
                 <tbody>  
-                    <!-- <tr *ngFor="let User of allUser|async|"> -->
-                    <!-- <tr ng-repeat="User in allUser|orderBy:propertyName:reverse"> -->
                     <tr *ngFor="let Project of allProject">
                         <td>{{Project.projectID}}</td>  
                         <td>{{Project.projectDesc}}</td>  
@@ -134,15 +120,6 @@
             sd.enabled=false; ed.enabled=false;
         }
     }
-
-    // var slider = document.getElementById("priority");
-    // var output = document.getElementById("prioritydisp");
-    // output.innerHTML = slider.value;
-
-    // slider.oninput = function() 
-    // {
-    //     output.innerHTML = this.value;
-    // }
 
     function sortTable(n) {
         var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;

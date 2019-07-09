@@ -12,10 +12,6 @@ export class Project
   public projEndDate: Date;
   public projPriority: string;
   public userID: string;
-  // static usertask: any;
-    
-    // userID: string;
-    // projusertask:Usertask;
-    public userTaskCount: number;
-    public userTaskCompletedCount: number;
+  public userTaskCount: number;
+  public userTaskCompletedCount: number;
 }

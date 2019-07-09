@@ -59,7 +59,7 @@ export class UsertaskComponent implements OnInit {
   
     AddUpdateUsertask(Usertask:Usertask)
     {
-      if ((Usertask.projectID = " " || null) || (Usertask.userTaskDesc = " " || null) || (Usertask.userTaskPriority = 0 || null) || (Usertask.userID = " " || null))
+      if ((Usertask.projectID == " " || null) || (Usertask.userTaskDesc == " " || null) || (Usertask.userTaskPriority == 0 || null) || (Usertask.userID == " " || null))
       {
         alert("Please Enter all the Task Details");
         return;
@@ -114,7 +114,7 @@ export class UsertaskComponent implements OnInit {
       this.addupdatebutton = "Update Task";
       this.UsertaskService.getUsertaskById(UsertaskID).subscribe(Response =>
         {
-          if (Response.userTaskStatus = false)
+          if (Response.userTaskStatus == false)
         {
           alert("Task is already Inactive. Task cannot be Edited");
           return;

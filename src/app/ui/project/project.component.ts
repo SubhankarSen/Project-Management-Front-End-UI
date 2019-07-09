@@ -83,19 +83,19 @@ export class ProjectComponent implements OnInit {
 
   AddUpdateProject(Project:Project)
   {
-    if ((Project.projectDesc = " " || null) || (Project.projPriority = " " || null) || (Project.userID = " " || null))
-    {
-      alert("Please enter project details");
-      return;
-    }
-    if (Project.projStartDate >= Project.projEndDate){
-      alert("Start Date cannot be greater than End Date");
-      return;
-    }
     debugger;
     if (this.ProjectID == "0" || null)
     {
       Project.projectID = this.ProjectID;
+      if ((Project.projectDesc == " " || null) || (Project.projPriority == "0" || null) ||(Project.userID == " " || null))
+      {
+        alert("Please enter project details");
+        return;
+      }
+      if (Project.projStartDate >= Project.projEndDate){
+        alert("Start Date cannot be greater than End Date");
+        return;
+      }
       this.ProjectService.CreateProject(Project).subscribe(() => 
       {
           this.dataSaved = true;
@@ -109,6 +109,15 @@ export class ProjectComponent implements OnInit {
     else
     {
       Project.projectID = this.ProjectID;
+      if ((Project.projectDesc == " " || null) || (Project.projPriority == "0" || null) ||(Project.userID == " " || null))
+      {
+        alert("Please enter project details");
+        return;
+      }
+      if (Project.projStartDate >= Project.projEndDate){
+        alert("Start Date cannot be greater than End Date");
+        return;
+      }
       this.ProjectService.UpdateProject(Project).subscribe(() =>
       {
         this.dataSaved = true;

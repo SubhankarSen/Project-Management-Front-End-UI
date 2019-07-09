@@ -84,7 +84,7 @@ export class ViewtaskComponent implements OnInit {
     this.UsertaskService.getUsertaskById(UsertaskID).subscribe(Usertask =>
       {
         debugger;
-        if (Usertask.userTaskStatus = false)
+        if (Usertask.userTaskStatus == false)
         {
           alert("Task is already Inactive. Task cannot be Ended");
           return;

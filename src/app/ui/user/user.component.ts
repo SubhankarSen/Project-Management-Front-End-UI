@@ -34,15 +34,15 @@ export class UserComponent implements OnInit {
 
   AddUpdateUser(User:User)
   {
-    if (User.userFirstName=="" || User.userLastName=="" || User.userEmployeeID==null)
-    {
-      alert("Input Field should not be blank")
-      return;
-    }
     debugger;
     if (this.UserID == "0" || null)
     {
       User.userID = this.UserID;
+      if (User.userFirstName=="" || User.userLastName=="" || User.userEmployeeID==null)
+    {
+      alert("Input Field should not be blank")
+      return;
+    }
       this.UserService.CreateUser(User).subscribe(() => 
       {
           this.dataSaved = true;
@@ -55,6 +55,11 @@ export class UserComponent implements OnInit {
     else
     {
       User.userID = this.UserID;
+      if (User.userFirstName=="" || User.userLastName=="" || User.userEmployeeID==null)
+    {
+      alert("Input Field should not be blank")
+      return;
+    }
       this.UserService.UpdateUser(User).subscribe(() =>
       {
         this.dataSaved = true;

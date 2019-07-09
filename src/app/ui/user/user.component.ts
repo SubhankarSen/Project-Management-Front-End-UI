@@ -38,11 +38,11 @@ export class UserComponent implements OnInit {
     if (this.UserID == "0" || null)
     {
       User.userID = this.UserID;
-      if (User.userFirstName=="" || User.userLastName=="" || User.userEmployeeID==null)
-    {
-      alert("Input Field should not be blank")
-      return;
-    }
+      if ((User.userFirstName == " " || null) || (User.userLastName == " " || null) || (User.userEmployeeID == 0 || null))
+      {
+        alert("Input Field should not be blank")
+        return;
+      }
       this.UserService.CreateUser(User).subscribe(() => 
       {
           this.dataSaved = true;
@@ -55,7 +55,7 @@ export class UserComponent implements OnInit {
     else
     {
       User.userID = this.UserID;
-      if (User.userFirstName=="" || User.userLastName=="" || User.userEmployeeID==null)
+      if ((User.userFirstName == " " || null) || (User.userLastName == " " || null) || (User.userEmployeeID == 0 || null))
     {
       alert("Input Field should not be blank")
       return;

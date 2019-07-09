@@ -93,7 +93,7 @@ export class ProjectComponent implements OnInit {
         return;
       }
       if (Project.projStartDate >= Project.projEndDate){
-        alert("Start Date cannot be greater than End Date");
+        alert("Start Date cannot be greater or equal than End Date");
         return;
       }
       this.ProjectService.CreateProject(Project).subscribe(() => 

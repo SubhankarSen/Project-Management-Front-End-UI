@@ -25,6 +25,7 @@ export class ViewtaskComponent implements OnInit {
   Usertask: Usertask;
   Usertasklist: Usertasklist;
   Parenttask:Parenttask;
+  UserTaskDesc: string;
   // FromViewtask:FormGroup;
   FromViewtask = this.formbuilder.group(
     {
@@ -46,13 +47,13 @@ export class ViewtaskComponent implements OnInit {
     this.UsertaskService.getUsertask().subscribe((u)=>
     {
       this.allUsertask=u;
-      this.allUsertask.forEach(userTask => 
-        {
-          if(userTask.parentTaskID = null)
-          {
-            userTask.parentTask.parentTaskDesc = "&nbsp;";
-          }
-        });
+      // this.allUsertask.forEach(userTask => 
+      //   {
+      //     if(userTask.parentTaskID = null)
+      //     {
+      //       userTask.parentTask.parentTaskDesc = "&nbsp;";
+      //     }
+      //   });
     });
     // this.allUsertask = this.UsertaskService.getUsertask();
     console.log(this.allUsertask);
@@ -90,13 +91,17 @@ export class ViewtaskComponent implements OnInit {
     {
       this.Project=p;
       this.allUsertasklist = p.userTasks;
-      this.allUsertasklist.forEach(userTask => 
-        {
-          if(userTask.parentTaskID = null)
-          {
-            userTask.parentTask.parentTaskDesc = "&nbsp;";
-          }
-        });
+      // this.allUsertasklist.forEach(userTask => 
+      //   {
+      //     if(userTask.parentTaskID = null)
+      //     {
+      //       this.UserTaskDesc = " ";
+      //     }
+      //     else
+      //     {
+      //       this.UserTaskDesc = userTask.parentTask.parentTaskDesc;
+      //     }
+      //   });
     });
     console.log(this.Project);
     console.log(this.allUsertasklist);

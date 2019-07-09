@@ -6,8 +6,7 @@ import { UserService } from 'src/app/services/user.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { DatePipe } from '@angular/common';
-import { ProjectAdd } from 'src/app/model/project-add';
-import { Usertask } from 'src/app/model/usertask';
+import { Usertasklist } from 'src/app/model/usertasklist';
 
 @Component({
   selector: 'app-project',
@@ -38,9 +37,11 @@ export class ProjectComponent implements OnInit {
       projPriority: ['',[Validators.required]],
       userID: ['',[Validators.required]],
     });
-  UserTaskCount: number = 0;
+  UserTaskCount: number[];
   allUserTask: any;
-  UserTaskComplete: number = 0;
+  UserTaskComplete: number[];
+  i: number = 0;
+  j: number = 0;
 
 
   constructor
@@ -64,19 +65,22 @@ export class ProjectComponent implements OnInit {
       this.allProject = p;
       this.allProject.forEach(Project => 
         {
-          Project.userTasks.forEach(Usertask => 
+          this.i = this.j = 0;
+          Project.userTasks.forEach((Usertasklist) => 
             {
-              this.UserTaskCount = this.UserTaskCount + 1;
-              if (Usertask.userTaskStatus = false)
+              this.i = this.i + 1;
+              if (Usertasklist.userTaskStatus == false)
               {
-                this.UserTaskComplete = this.UserTaskComplete + 1;
+                this.j = this.j + 1;
               }
             });
+            Project.userTaskCount = this.i;
+            console.log(Project.userTaskCount);
+            Project.userTaskCompletedCount = this.j;
+            console.log(Project.userTaskCompletedCount);
         });
     });
-    console.log(this.allProject);
-    console.log(this.UserTaskCount);
-    console.log(this.UserTaskComplete);
+    // console.log(this.allProject);
   }
 
   Reset()

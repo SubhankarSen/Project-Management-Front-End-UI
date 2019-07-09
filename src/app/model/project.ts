@@ -16,6 +16,6 @@ export class Project
     
     // userID: string;
     // projusertask:Usertask;
-    // userTaskCount: number;
-    // userTaskCompletedCount: number;
+    public userTaskCount: number;
+    public userTaskCompletedCount: number;
 }

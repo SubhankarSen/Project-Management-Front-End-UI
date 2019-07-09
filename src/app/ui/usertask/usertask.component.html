@@ -33,8 +33,7 @@
             </div>
             <div class="row">
                 <div class="form-group form-inline mr-sm-3 col-sm-3">
-                    <label form="company">Priority: </label><input type="range" min="0" max="30" value="0" class="slider" id="priority" formControlName="userTaskPriority">
-                    <!-- <p><span id="prioritydisp"></span></p> -->
+                    <label form="company">Priority: </label><input type="range" min="0" max="30" value="0" class="slider" id="priority" formControlName="userTaskPriority" oninput="prioritydisp.value=priority.value">
                     <output id="prioritydisp" name="prioritydisp" for="priority">0</output>
                 </div>
             </div>

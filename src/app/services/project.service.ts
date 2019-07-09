@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Project } from '../model/project';
 import { Observable } from 'rxjs';
-import { ProjectAdd } from '../model/project-add';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +39,7 @@ export class ProjectService {
   }
 
   // UpdateProject(Project:ProjectAdd):Observable<ProjectAdd>
-  UpdateProject(Project:ProjectAdd):Observable<Project>
+  UpdateProject(Project:Project):Observable<Project>
   {
     const httpOptions = {headers: new HttpHeaders({'Content-Type':'application/json'})};
     // return this.http.put<ProjectAdd>(this.ProjectApiUrl+'/'+Project.projectID,Project,httpOptions);

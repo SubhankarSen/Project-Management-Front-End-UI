@@ -32,7 +32,7 @@
             <div class="row">
                 <div class="form-group form-inline mr-sm-3 col-sm-3">
                     <!-- <input type="range" class="slider" id="priority" min="1" max="30" value="10" onclick="document.getElementById('prioritydisp').innerHTML = " -->
-                    <label form="company"> Priority: </label><input type="range" min="0" max="30" value="0" class="slider" id="priority" formControlName="projPriority">
+                    <label form="company"> Priority: </label><input type="range" min="0" max="30" class="slider" id="priority" formControlName="projPriority" oninput="prioritydisp.value=priority.value">
                     <!-- <p><span id="prioritydisp"></span></p> -->
                     <output id="prioritydisp" name="prioritydisp" for="priority">0</output>
                 </div>
@@ -103,8 +103,8 @@
                     <tr *ngFor="let Project of allProject">
                         <td>{{Project.projectID}}</td>  
                         <td>{{Project.projectDesc}}</td>  
-                        <td>{{UserTaskCount}}</td>  
-                        <td>{{UserTaskComplete}}</td>  
+                        <td>{{Project.userTaskCount}}</td>  
+                        <td>{{Project.userTaskCompletedCount}}</td>  
                         <td>{{Project.projStartDate}}</td>  
                         <td>{{Project.projEndDate}}</td>  
                         <td>{{Project.projPriority}}</td>    

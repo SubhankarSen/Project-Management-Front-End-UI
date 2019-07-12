@@ -60,7 +60,7 @@ export class UserComponent implements OnInit {
     else
     {
       User.userID = this.UserID;
-      if ((User.userFirstName == " " || null) || (User.userLastName == " " || null) || (User.userEmployeeID == 0 || null))
+      if ((User.userFirstName == null) || (User.userLastName == null) || (User.userEmployeeID == null))
     {
       alert("Input Field should not be blank")
       return;

@@ -29,7 +29,7 @@
         </td>
     </div>
     <div class="card-footer">
-        <div class="col-lg-12 table-responsive">  
+        <!-- <div class="col-lg-12 table-responsive">  
             <table class="table table-striped" id="userTask">
                 <thead>  
                     <tr>
@@ -43,7 +43,6 @@
                     </tr> 
                 </thead>
                 <tbody *ngIf="!Project ; else usertasklist">
-                    <!-- <tr *ngFor="let Usertask of allUsertask"> -->
                     <tr *ngFor="let Usertask of allUsertask | orderBy: sortingName: isDesc">
                         <td>{{Usertask.userTaskID}}</td>
                         <td>{{Usertask.userTaskDesc}}</td>  
@@ -74,45 +73,108 @@
                     </tr>
                 </ng-template>
             </table>
+        </div> -->
+        <div *ngIf="!Project ; else usertasklist">
+            <div *ngFor="let Usertask of allUsertask | orderBy: sortingName: isDesc">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <ul class="list-group list-group-horizontal">
+                            <li class="list-group-item">
+                                <ul class="list-group">
+                                    <li class="list-group-item">Task</li>
+                                    <li class="list-group-item">{{Usertask.userTaskDesc}}</li>
+                                </ul>
+                            </li>
+                            <li class="list-group-item">
+                                <ul class="list-group">
+                                    <li class="list-group-item">Parent</li>
+                                    <li class="list-group-item" *ngIf="!Usertask.parentTask ; else showvalue">&nbsp;</li>
+                                    <ng-template #showvalue>{{Usertask.parentTask.parentTaskDesc}}</ng-template>
+                                </ul>
+                            </li>
+                            <li class="list-group-item">
+                                <ul class="list-group">
+                                    <li class="list-group-item">Priority</li>
+                                    <li class="list-group-item">{{Usertask.userTaskPriority}}</li>
+                                </ul>
+                            </li>
+                            <li class="list-group-item">
+                                <ul class="list-group">
+                                    <li class="list-group-item">Start</li>
+                                    <li class="list-group-item">{{Usertask.userTaskStartDate}}</li>
+                                </ul>
+                            </li>
+                            <li class="list-group-item">
+                                <ul class="list-group">
+                                    <li class="list-group-item">End</li>
+                                    <li class="list-group-item">{{Usertask.userTaskEndDate}}</li>
+                                </ul>
+                            </li>
+                            <li class="list-group-item">
+                                <ul class="list-group list-group-horizontal">
+                                    <li class="list-group-item">
+                                        <button type="button" class="btn btn-primary mr-1" (click)="UsertaskEdit(Usertask.userTaskID)">Edit</button>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <button type="button" class="btn btn-danger mr-1" (click)="EndUsertask(Usertask.userTaskID)">End Task</button>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
+        <ng-template #usertasklist>
+            <div *ngFor="let Usertasklist of allUsertasklist  | orderBy: sortingName: isDesc">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <ul class="list-group list-group-horizontal">
+                            <li class="list-group-item">
+                                <ul class="list-group">
+                                    <li class="list-group-item">Task</li>
+                                    <li class="list-group-item">{{Usertasklist.userTaskDesc}}</li>
+                                </ul>
+                            </li>
+                            <li class="list-group-item">
+                                <ul class="list-group">
+                                    <li class="list-group-item">Parent</li>
+                                    <li class="list-group-item" *ngIf="!Usertasklist.parentTask ; else showvalue">&nbsp;</li>
+                                    <ng-template #showvalue>{{Usertasklist.parentTask.parentTaskDesc}}</ng-template>
+                                </ul>
+                            </li>
+                            <li class="list-group-item">
+                                <ul class="list-group">
+                                    <li class="list-group-item">Priority</li>
+                                    <li class="list-group-item">{{Usertasklist.userTaskPriority}}</li>
+                                </ul>
+                            </li>
+                            <li class="list-group-item">
+                                <ul class="list-group">
+                                    <li class="list-group-item">Start</li>
+                                    <li class="list-group-item">{{Usertasklist.userTaskStartDate}}</li>
+                                </ul>
+                            </li>
+                            <li class="list-group-item">
+                                <ul class="list-group">
+                                    <li class="list-group-item">End</li>
+                                    <li class="list-group-item">{{Usertasklist.userTaskEndDate}}</li>
+                                </ul>
+                            </li>
+                            <li class="list-group-item">
+                                <ul class="list-group list-group-horizontal">
+                                    <li class="list-group-item">
+                                        <button type="button" class="btn btn-primary mr-1" (click)="UsertaskEdit(Usertasklist.userTaskID)">Edit</button>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <button type="button" class="btn btn-danger mr-1" (click)="EndUsertask(Usertasklist.userTaskID)">End Task</button>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </ng-template>
     </div>
 </div>
-
-<script>
-    function sortTable(n) {
-        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-        table = document.getElementById("userTask");
-        switching = true;
-        dir = "asc"; 
-        while (switching) {
-        switching = false;
-        rows = table.rows;
-        for (i = 1; i < (rows.length - 1); i++) {
-            shouldSwitch = false;
-            x = rows[i].getElementsByTagName("td")[n];
-            y = rows[i + 1].getElementsByTagName("td")[n];
-            if (dir == "asc") {
-            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                shouldSwitch= true;
-                break;
-            }
-            } else if (dir == "desc") {
-            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                shouldSwitch = true;
-                break;
-            }
-            }
-        }
-        if (shouldSwitch) {
-            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-            switching = true;
-            switchcount ++;      
-        } else {
-            if (switchcount == 0 && dir == "asc") {
-            dir = "desc";
-            switching = true;
-            }
-        }
-        }
-    }
-</script> 

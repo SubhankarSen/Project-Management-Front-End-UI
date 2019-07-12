@@ -1,5 +1,5 @@
 export class Parenttask 
 {
-    public parentTaskID: number;
+    public parentTaskID: string;
     public parentTaskDesc: string;
 }

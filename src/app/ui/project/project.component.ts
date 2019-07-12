@@ -21,7 +21,7 @@ export class ProjectComponent implements OnInit {
   ProjectID:string = "0";
   allProject:Project[];
   allUser:User[];
-  setdate = false;
+  setdate:boolean = false;
   project:Project;
   user:User;
   todayDate: any;
@@ -32,8 +32,8 @@ export class ProjectComponent implements OnInit {
     {
       projectID: ['',[Validators.required]],
       projectDesc: ['',[Validators.required]],
-      projStartDate: ['',[Validators.required]],
-      projEndDate: ['',[Validators.required]],
+      projStartDate: [{value:'',disabled:this.setdate},[Validators.required]],
+      projEndDate: [{value:'',disabled:this.setdate},[Validators.required]],
       projPriority: ['',[Validators.required]],
       userID: ['',[Validators.required]],
     });
@@ -91,15 +91,19 @@ export class ProjectComponent implements OnInit {
     if (this.ProjectID == "0" || null)
     {
       Project.projectID = this.ProjectID;
-      if ((Project.projectDesc == " " || null) || (Project.projPriority == "0" || null) ||(Project.userID == " " || null))
+
+      if ((Project.projectDesc == null) || (Project.projPriority == null) || (Project.userID == null))
       {
-        alert("Please enter project details");
+        alert("Please enter Project Details");
         return;
       }
-      if (Project.projStartDate >= Project.projEndDate){
+
+      if ((this.setdate == true) && (Project.projStartDate >= Project.projEndDate))
+      {
         alert("Start Date cannot be greater or equal than End Date");
         return;
       }
+
       this.ProjectService.CreateProject(Project).subscribe(() => 
       {
           this.dataSaved = true;
@@ -113,15 +117,19 @@ export class ProjectComponent implements OnInit {
     else
     {
       Project.projectID = this.ProjectID;
-      if ((Project.projectDesc == " " || null) || (Project.projPriority == "0" || null) ||(Project.userID == " " || null))
+
+      if ((Project.projectDesc == null) || (Project.projPriority == null) || (Project.userID == null))
       {
         alert("Please enter project details");
         return;
       }
-      if (Project.projStartDate >= Project.projEndDate){
-        alert("Start Date cannot be greater than End Date");
+
+      if ((this.setdate == true) && (Project.projStartDate >= Project.projEndDate))
+      {
+        alert("Start Date cannot be Greater than or Equal to End Date");
         return;
       }
+
       this.ProjectService.UpdateProject(Project).subscribe(() =>
       {
         this.dataSaved = true;
@@ -167,12 +175,12 @@ export class ProjectComponent implements OnInit {
 
   ngOnInit() 
   {
-      this.Reset();
-      this.GetProject();
-      this.todayDate = new Date();
-      this.tomorrowDate = new Date();
-      this.tomorrowDate.setDate(this.tomorrowDate.getDate()+1);
-      this.addupdatebutton = "Add Project";
+    this.Reset();
+    this.GetProject();
+    this.todayDate = new Date();
+    this.tomorrowDate = new Date();
+    this.tomorrowDate.setDate(this.tomorrowDate.getDate()+1);
+    this.addupdatebutton = "Add Project";
   }
 
   GetUser(e:any)
@@ -186,12 +194,31 @@ export class ProjectComponent implements OnInit {
     return this.FromProject.get('userID');
   }
 
-  sort(name: string): void {
+  sort(name: string): void 
+  {
     if (name && this.sortingName !== name) {
       this.isDesc = false;
     } else {
       this.isDesc = !this.isDesc;
     }
     this.sortingName = name;
+  }
+
+  checkSetDate(p: boolean): void
+  {
+    this.setdate = p;
+    console.log(this.setdate);
+    const startdateCtrl = this.FromProject.get('projStartDate');
+    const enddateCtrl = this.FromProject.get('projEndDate');
+    if (p == true)
+    {
+      startdateCtrl.enable();
+      enddateCtrl.enable();
+    }
+    else
+    {
+      startdateCtrl.disable();
+      enddateCtrl.disable();
+    }
   }
 }

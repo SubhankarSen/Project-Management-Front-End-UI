@@ -8,8 +8,10 @@ import { Observable } from 'rxjs';
 })
 export class ProjectService {
 
-  public ApiUrl = 'http://localhost:64492/api';
-  public ProjectApiUrl = 'http://localhost:64492/api/Projects';
+  // public ApiUrl = 'http://localhost:64492/api';
+  // public ProjectApiUrl = 'http://localhost:64492/api/Projects';
+  public ApiUrl = 'http://localhost/BackEndAPI/api';
+  public ProjectApiUrl = 'http://localhost/BackEndAPI/api/Projects';
 
   constructor(private http:HttpClient) { }
 

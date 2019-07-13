@@ -8,8 +8,10 @@ import { User } from '../model/user';
 })
 export class UserService {
 
-  public ApiUrl = 'http://localhost:64492/api';
-  public UserApiUrl = 'http://localhost:64492/api/Users';
+  // public ApiUrl = 'http://localhost:64492/api';
+  // public UserApiUrl = 'http://localhost:64492/api/Users';
+  public ApiUrl = 'http://localhost/BackEndAPI/api';
+  public UserApiUrl = 'http://localhost/BackEndAPI/api/Users';
 
   constructor(private http:HttpClient) { }
 

@@ -8,10 +8,10 @@ import { Parenttask } from '../model/parenttask';
 })
 export class ParenttaskService {
 
-  // public ApiUrl = 'http://localhost:64492/api';
-  // public ParenttaskApiUrl = 'http://localhost:64492/api/ParentTasks';
-  public ApiUrl = 'http://localhost/BackEndAPI/api';
-  public ParenttaskApiUrl = 'http://localhost/BackEndAPI/api/ParentTasks';
+  public ApiUrl = 'http://localhost:64492/api';
+  public ParenttaskApiUrl = 'http://localhost:64492/api/ParentTasks';
+  // public ApiUrl = 'http://localhost/BackEndAPI/api';
+  // public ParenttaskApiUrl = 'http://localhost/BackEndAPI/api/ParentTasks';
 
   constructor(private http:HttpClient) { }
 

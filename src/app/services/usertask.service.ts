@@ -8,10 +8,10 @@ import { Observable } from 'rxjs';
 })
 export class UsertaskService {
 
-  // public ApiUrl = 'http://localhost:64492/api';
-  // public UsertaskApiUrl = 'http://localhost:64492/api/UserTasks';
-  public ApiUrl = 'http://localhost/BackEndAPI/api';
-  public UsertaskApiUrl = 'http://localhost/BackEndAPI/api/UserTasks';
+  public ApiUrl = 'http://localhost:64492/api';
+  public UsertaskApiUrl = 'http://localhost:64492/api/UserTasks';
+  // public ApiUrl = 'http://localhost/BackEndAPI/api';
+  // public UsertaskApiUrl = 'http://localhost/BackEndAPI/api/UserTasks';
 
   constructor(private http:HttpClient) { }
 

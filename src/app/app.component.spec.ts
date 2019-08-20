@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'Front-End-UI'`, () => {
+  it(`should have as title 'Project Manager'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('Front-End-UI');
+    expect(app.title).toEqual('Project Manager');
   });
 
   it('should render title in a h1 tag', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to Front-End-UI!');
+    expect(compiled.querySelector('h1').textContent).toContain('Project Manager');
   });
 });

@@ -8,6 +8,10 @@ import {
 } from '@angular/platform-browser-dynamic/testing';
 
 declare const require: any;
+// declare const _karma_: any;
+
+/* //Prevent Karma from running prematurely.
+_karma_.loaded = function(){}; */
 
 // First, initialize the Angular testing environment.
 getTestBed().initTestEnvironment(
@@ -18,3 +22,6 @@ getTestBed().initTestEnvironment(
 const context = require.context('./', true, /\.spec\.ts$/);
 // And load the modules.
 context.keys().map(context);
+
+/* //Finally, start Karma to run the tests.
+_karma_.start(); */
